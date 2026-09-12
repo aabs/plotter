@@ -14,13 +14,13 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Purpose**: Establish the .NET 10/C# 14 CLI, central package management, analyzers, packaging, and property-test project.
 
-- [ ] T001 Create repository-wide `Directory.Packages.props` with central package management and pinned Spectre.Console, Tomlyn, FsCheck, FsCheck.Xunit, xUnit, coverage, and packaging tool versions.
-- [ ] T002 [P] Configure root `.editorconfig` with nullable/analyzer/style rules required by the constitution.
-- [ ] T003 Update `src/Plotter.Cli/Plotter.Cli.csproj` for NuGet tool metadata, `net10.0`, C# 14, nullable, warnings-as-errors, analyzers, and central package references.
-- [ ] T004 [P] Create `test/Plotter.PropertyTests/Plotter.PropertyTests.csproj` targeting `net10.0` with FsCheck, FsCheck.Xunit, xUnit integration, coverage, and a project reference to `src/Plotter.Cli/Plotter.Cli.csproj`.
+- [x] T001 Create repository-wide `Directory.Packages.props` with central package management and pinned Spectre.Console, Tomlyn, FsCheck, FsCheck.Xunit, xUnit, coverage, and packaging tool versions.
+- [x] T002 [P] Configure root `.editorconfig` with nullable/analyzer/style rules required by the constitution.
+- [x] T003 Update `src/Plotter.Cli/Plotter.Cli.csproj` for NuGet tool metadata, `net10.0`, C# 14, nullable, warnings-as-errors, analyzers, and central package references.
+- [x] T004 [P] Create `test/Plotter.PropertyTests/Plotter.PropertyTests.csproj` targeting `net10.0` with FsCheck, FsCheck.Xunit, xUnit integration, coverage, and a project reference to `src/Plotter.Cli/Plotter.Cli.csproj`.
 - [ ] T005 [P] Create the planned source directories under `src/Plotter.Cli/Domain`, `Application`, `Infrastructure`, `Presentation`, and `Serialization`.
 - [ ] T006 [P] Create the property-test directories under `test/Plotter.PropertyTests/Generators`, `Oracles`, `DomainProperties`, `PersistenceProperties`, `ProjectionProperties`, `CliProperties`, and `RegressionTests`.
-- [ ] T007 Add solution/project membership for `src/Plotter.Cli/Plotter.Cli.csproj` and `test/Plotter.PropertyTests/Plotter.PropertyTests.csproj` in `plotter.slnx`.
+- [x] T007 Add solution/project membership for `src/Plotter.Cli/Plotter.Cli.csproj` and `test/Plotter.PropertyTests/Plotter.PropertyTests.csproj` in `plotter.slnx`.
 - [ ] T008 Add CI/build configuration for `dotnet restore`, `dotnet build --no-restore`, `dotnet test`, coverage collection, and `dotnet format --verify-no-changes` in `.github/workflows/ci.yml`.
 
 ---
