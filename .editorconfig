@@ -11,6 +11,10 @@ indent_size = 4
 dotnet_diagnostic.CA1303.severity = none
 # TOML writer controls numeric formatting with invariant culture; interpolated string diagnostics are redundant here.
 dotnet_diagnostic.CA1305.severity = none
+# Console application: awaiting without ConfigureAwait is acceptable outside library code.
+dotnet_diagnostic.CA2007.severity = none
+# GapClass.Long is the spec-defined name; the type-name warning is not actionable here.
+dotnet_diagnostic.CA1720.severity = none
 dotnet_diagnostic.CA1822.severity = warning
 csharp_style_var_for_built_in_types = false:suggestion
 csharp_style_var_when_type_is_apparent = false:suggestion

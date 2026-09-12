@@ -31,23 +31,23 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Checkpoint**: No user-story implementation starts until this phase passes its property suite and build gates.
 
-- [ ] T009 Define immutable ID/value types and enums in `src/Plotter.Cli/Domain/Identifiers.cs` and `src/Plotter.Cli/Domain/Values.cs`, including non-empty unique IDs, story date/time certainty, durations, gap classes, finding severity, plot-thread classification, and continuity annotations.
-- [ ] T010 [P] Define immutable domain records for Workspace, Scene, Participant, ParticipantGroup, Location, Plot, Interaction, and relationship metadata in `src/Plotter.Cli/Domain/Entities.cs`.
-- [ ] T011 [P] Define explicit TOML serialization DTOs separate from domain records in `src/Plotter.Cli/Serialization/TomlDtos.cs`.
-- [ ] T012 Define domain validation results and actionable diagnostic types in `src/Plotter.Cli/Domain/Validation.cs`, enforcing “POV participant belongs to scene”, non-negative duration, valid Plot time bounds, and reference closure.
-- [ ] T013 [P] Add FsCheck generators for valid/invalid IDs, dates, durations, scenes, entities, relationships, workspaces, and continuity annotations in `test/Plotter.PropertyTests/Generators/DomainGenerators.cs`.
-- [ ] T014 [P] Add reusable reference-model oracles for TOML round trips, ordering, classifications, projection equivalence, and audit severity in `test/Plotter.PropertyTests/Oracles/ReferenceOracles.cs`.
-- [ ] T015 Define `INovelFileResolver` and current-folder/explicit-path resolution in `src/Plotter.Cli/Infrastructure/Configuration/NovelFileResolver.cs`; default to `novel.toml` in the current folder and prevent cross-file leakage.
-- [ ] T016 Define typed application options for file selection, output format, locale/time settings, and TUI behavior in `src/Plotter.Cli/Infrastructure/Configuration/PlotterOptions.cs`.
-- [ ] T017 Implement async Tomlyn-backed load/save behind `INovelWorkspaceStore` in `src/Plotter.Cli/Infrastructure/Storage/TomlWorkspaceStore.cs`, accepting and propagating `CancellationToken`, including format/version validation and atomic commit-or-rollback writes.
-- [ ] T018 [P] Add property tests for ID uniqueness, reference closure, validation invariants, current-folder resolution, explicit file selection, cancellation propagation, and atomic invalid-write behavior in `test/Plotter.PropertyTests/DomainProperties/FoundationalProperties.cs` and `test/Plotter.PropertyTests/PersistenceProperties/FileResolutionProperties.cs`.
-- [ ] T019 Add the persistence round-trip property `Save(Load(Save(workspace))) == workspace` with shrinking counterexamples in `test/Plotter.PropertyTests/PersistenceProperties/TomlRoundTripProperties.cs`.
-- [ ] T020 Define application query/result DTOs and async `IProjectionQueryService` contracts with `CancellationToken` in `src/Plotter.Cli/Application/Queries/QueryContracts.cs`.
-- [ ] T021 Define command/result, audit finding, export, and rendering abstractions in `src/Plotter.Cli/Application/Commands/ApplicationContracts.cs` and `src/Plotter.Cli/Application/Projections/ProjectionContracts.cs`.
-- [ ] T022 Implement structured logging, expected-result diagnostics, and exception-preserving error boundaries in `src/Plotter.Cli/Infrastructure/Diagnostics/DiagnosticServices.cs`.
-- [ ] T023 Configure dependency injection and options binding in `src/Plotter.Cli/Program.cs` and `src/Plotter.Cli/Infrastructure/Composition/ServiceRegistration.cs`.
-- [ ] T024 Add shared projection-equivalence properties for plain text, JSON, CSV, and audit results in `test/Plotter.PropertyTests/ProjectionProperties/ProjectionEquivalenceProperties.cs`.
-- [ ] T025 Add `test/Plotter.PropertyTests/RegressionTests/RegressionTestPolicy.md` documenting that example tests require a named historical defect and that all other coverage is property-based.
+- [x] T009 Define immutable ID/value types and enums in `src/Plotter.Cli/Domain/Identifiers.cs` and `src/Plotter.Cli/Domain/Values.cs`, including non-empty unique IDs, story date/time certainty, durations, gap classes, finding severity, plot-thread classification, and continuity annotations.
+- [x] T010 [P] Define immutable domain records for Workspace, Scene, Participant, ParticipantGroup, Location, Plot, Interaction, and relationship metadata in `src/Plotter.Cli/Domain/Entities.cs`.
+- [x] T011 [P] Define explicit TOML serialization DTOs separate from domain records in `src/Plotter.Cli/Serialization/TomlDtos.cs`.
+- [x] T012 Define domain validation results and actionable diagnostic types in `src/Plotter.Cli/Domain/Validation.cs`, enforcing “POV participant belongs to scene”, non-negative duration, valid Plot time bounds, and reference closure.
+- [x] T013 [P] Add FsCheck generators for valid/invalid IDs, dates, durations, scenes, entities, relationships, workspaces, and continuity annotations in `test/Plotter.PropertyTests/Generators/DomainGenerators.cs`.
+- [x] T014 [P] Add reusable reference-model oracles for TOML round trips, ordering, classifications, projection equivalence, and audit severity in `test/Plotter.PropertyTests/Oracles/ReferenceOracles.cs`.
+- [x] T015 Define `INovelFileResolver` and current-folder/explicit-path resolution in `src/Plotter.Cli/Infrastructure/Configuration/NovelFileResolver.cs`; default to `novel.toml` in the current folder and prevent cross-file leakage.
+- [x] T016 Define typed application options for file selection, output format, locale/time settings, and TUI behavior in `src/Plotter.Cli/Infrastructure/Configuration/PlotterOptions.cs`.
+- [x] T017 Implement async Tomlyn-backed load/save behind `INovelWorkspaceStore` in `src/Plotter.Cli/Infrastructure/Storage/TomlWorkspaceStore.cs`, accepting and propagating `CancellationToken`, including format/version validation and atomic commit-or-rollback writes.
+- [x] T018 [P] Add property tests for ID uniqueness, reference closure, validation invariants, current-folder resolution, explicit file selection, cancellation propagation, and atomic invalid-write behavior in `test/Plotter.PropertyTests/DomainProperties/FoundationalProperties.cs` and `test/Plotter.PropertyTests/PersistenceProperties/FileResolutionProperties.cs`.
+- [x] T019 Add the persistence round-trip property `Save(Load(Save(workspace))) == workspace` with shrinking counterexamples in `test/Plotter.PropertyTests/PersistenceProperties/TomlRoundTripProperties.cs`.
+- [x] T020 Define application query/result DTOs and async `IProjectionQueryService` contracts with `CancellationToken` in `src/Plotter.Cli/Application/Queries/QueryContracts.cs`.
+- [x] T021 Define command/result, audit finding, export, and rendering abstractions in `src/Plotter.Cli/Application/Commands/ApplicationContracts.cs` and `src/Plotter.Cli/Application/Projections/ProjectionContracts.cs`.
+- [x] T022 Implement structured logging, expected-result diagnostics, and exception-preserving error boundaries in `src/Plotter.Cli/Infrastructure/Diagnostics/DiagnosticServices.cs`.
+- [x] T023 Configure dependency injection and options binding in `src/Plotter.Cli/Program.cs` and `src/Plotter.Cli/Infrastructure/Composition/ServiceRegistration.cs`.
+- [x] T024 Add shared projection-equivalence properties for plain text, JSON, CSV, and audit results in `test/Plotter.PropertyTests/ProjectionProperties/ProjectionEquivalenceProperties.cs`.
+- [x] T025 Add `test/Plotter.PropertyTests/RegressionTests/RegressionTestPolicy.md` documenting that example tests require a named historical defect and that all other coverage is property-based.
 
 ---
 
