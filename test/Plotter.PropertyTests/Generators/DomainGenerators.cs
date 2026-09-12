@@ -80,7 +80,12 @@ public static class DomainGenerators
             SceneDuration? duration = index < durations.Count ? durations[index] : null;
             var sceneParticipants = participants.Length == 0 ? [] : participants.Take(index % (participants.Length + 1)).ToArray();
             var location = locations.Length == 0 ? null : (LocationId?)locations[index % locations.Length];
-            var scenePlots = plots.Length == 0 ? [] : plots.Take(index % (plots.Length + 1)).Select(plot => new PlotRelationship(plot, PlotThreadClassification.NotClassified)).ToArray();
+            var scenePlots = plots.Length == 0
+                ? []
+                : plots.Take(index % (plots.Length + 1)).Select(plot => new PlotRelationship(
+                    plot,
+                    (PlotThreadClassification)(index % 4),
+                    index % 2 == 0 ? $"annotation-{index}" : null)).ToArray();
             var pov = sceneParticipants.Length == 0 ? null : (ParticipantId?)sceneParticipants[0];
             workspace.Scenes[scenes[index].Value] = new Scene(
                 scenes[index],

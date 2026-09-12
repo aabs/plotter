@@ -34,6 +34,16 @@ public sealed record LocationDensityResult(IReadOnlyList<LocationDensityRow> Row
 
 public sealed record WhereResult(string ParticipantId, string? LocationId, IReadOnlyList<string> ConflictLocationIds);
 
+public sealed record ThreadMatrixCell(PlotThreadClassification Classification, string? Annotation);
+
+public sealed record ThreadMatrixRow(string SceneId, IReadOnlyDictionary<string, ThreadMatrixCell> Cells);
+
+public sealed record ThreadMatrixResult(IReadOnlyList<string> PlotIds, IReadOnlyList<ThreadMatrixRow> Rows);
+
+public sealed record ThreadTimelineRow(string SceneId, string? Title, string? Annotation);
+
+public sealed record ThreadTimelineResult(string PlotId, IReadOnlyList<ThreadTimelineRow> Rows);
+
 public sealed record SceneDetailResult(
     SceneId SceneId,
     string? Title,

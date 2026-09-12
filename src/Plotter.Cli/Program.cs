@@ -67,6 +67,12 @@ try
         case "locations":
             LocationCommandModule.RunLocationsList(workspace, arguments);
             return;
+        case "threads":
+            PlotThreadCommandModule.RunThreadsMatrix(workspace);
+            return;
+        case "thread":
+            PlotThreadCommandModule.RunThreadShow(workspace, arguments);
+            return;
         case "where":
             LocationCommandModule.RunWhere(workspace, arguments);
             return;

@@ -124,11 +124,11 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Generate plot-thread associations with all classifications and annotations, then verify matrix and timeline projections preserve all rows/threads.
 
-- [ ] T050 [P] [US5] Define plot-thread classification-symbol, matrix completeness, annotation ordering, unclassified-scene, and unresolved-thread properties in `test/Plotter.PropertyTests/ProjectionProperties/PlotThreadProperties.cs`.
-- [ ] T051 [US5] Implement plot-thread matrix and timeline query services in `src/Plotter.Cli/Application/Queries/PlotThreadQueries.cs`.
-- [ ] T052 [US5] Implement matrix and per-thread renderers in `src/Plotter.Cli/Presentation/Cli/PlotThreadRenderers.cs`.
-- [ ] T053 [US5] Register `novel threads matrix` and `novel thread show` commands in `src/Plotter.Cli/Presentation/Cli/PlotThreadCommandModule.cs`.
-- [ ] T054 [US5] Add CLI property coverage for `●`, `○`, `·`, `?`, empty rows, and missing resolutions in `test/Plotter.PropertyTests/CliProperties/PlotThreadCommandProperties.cs`.
+- [x] T050 [P] [US5] Define plot-thread classification-symbol, matrix completeness, annotation ordering, unclassified-scene, and unresolved-thread properties in `test/Plotter.PropertyTests/ProjectionProperties/PlotThreadProperties.cs`.
+- [x] T051 [US5] Implement plot-thread matrix and timeline query services in `src/Plotter.Cli/Application/Queries/PlotThreadQueries.cs`.
+- [x] T052 [US5] Implement matrix and per-thread renderers in `src/Plotter.Cli/Presentation/Cli/PlotThreadRenderers.cs`.
+- [x] T053 [US5] Register `novel threads matrix` and `novel thread show` commands in `src/Plotter.Cli/Presentation/Cli/PlotThreadCommandModule.cs`.
+- [x] T054 [US5] Add CLI property coverage for `●`, `○`, `·`, `?`, empty rows, and missing resolutions in `test/Plotter.PropertyTests/CliProperties/PlotThreadCommandProperties.cs`.
 
 ---
 
