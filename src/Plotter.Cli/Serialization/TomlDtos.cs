@@ -49,6 +49,12 @@ public sealed class TomlSceneDto
 {
     public string? Title { get; set; }
 
+    public int? NarrativePosition { get; set; }
+
+    public string? Act { get; set; }
+
+    public string? Chapter { get; set; }
+
     public string? StoryDateTime { get; set; }
 
     public double? DurationMinutes { get; set; }
@@ -57,7 +63,7 @@ public sealed class TomlSceneDto
 
     public List<string>? ParticipantIds { get; set; }
 
-    public List<string>? PlotIds { get; set; }
+    public List<TomlPlotRelationshipDto>? Plots { get; set; }
 
     public string? PovParticipantId { get; set; }
 
@@ -66,4 +72,13 @@ public sealed class TomlSceneDto
     public string? Notes { get; set; }
 
     public Dictionary<string, string>? ContinuityAnnotations { get; set; }
+}
+
+public sealed class TomlPlotRelationshipDto
+{
+    public string? PlotId { get; set; }
+
+    public string? Classification { get; set; }
+
+    public string? Annotation { get; set; }
 }

@@ -59,17 +59,17 @@ description: "Task list for implementing Novel Scene Timeline"
 
 ### Tests for User Story 1 (write first)
 
-- [ ] T026 [P] [US1] Define the scene metadata round-trip invariant for narrative position, Act, chapter, story date/time, duration, location ID, participant IDs, Plot IDs, POV Participant ID, status, notes, and title in `test/Plotter.PropertyTests/DomainProperties/SceneContextProperties.cs`.
-- [ ] T027 [P] [US1] Define invalid-scene properties for empty/duplicate Scene IDs, negative durations, unresolved IDs, and invalid POV references in `test/Plotter.PropertyTests/DomainProperties/SceneValidationProperties.cs`.
-- [ ] T028 [P] [US1] Define a regression-only example test only if a concrete prior scene-context defect is discovered in `test/Plotter.PropertyTests/RegressionTests/SceneContextRegressionTests.cs`.
+- [x] T026 [P] [US1] Define the scene metadata round-trip invariant for narrative position, Act, chapter, story date/time, duration, location ID, participant IDs, Plot IDs, POV Participant ID, status, notes, and title in `test/Plotter.PropertyTests/DomainProperties/SceneContextProperties.cs`.
+- [x] T027 [P] [US1] Define invalid-scene properties for empty/duplicate Scene IDs, negative durations, unresolved IDs, and invalid POV references in `test/Plotter.PropertyTests/DomainProperties/SceneValidationProperties.cs`.
+- [x] T028 [P] [US1] Define a regression-only example test only if a concrete prior scene-context defect is discovered in `test/Plotter.PropertyTests/RegressionTests/SceneContextRegressionTests.cs`.
 
 ### Implementation for User Story 1
 
-- [ ] T029 [US1] Implement workspace initialization/opening plus scene/entity create-update-remove application services in `src/Plotter.Cli/Application/Commands/WorkspaceCommands.cs`, `src/Plotter.Cli/Application/Commands/SceneCommands.cs`, and `src/Plotter.Cli/Application/Commands/EntityCommands.cs`; support `novel init` and `novel init --file <path>`.
-- [ ] T030 [US1] Implement scene reference and metadata validation in `src/Plotter.Cli/Application/Commands/SceneValidationService.cs`.
-- [ ] T031 [US1] Implement initialization, scene, participant, and location CLI commands using Spectre.Console in `src/Plotter.Cli/Presentation/Cli/WorkspaceCommandModule.cs`, `src/Plotter.Cli/Presentation/Cli/SceneCommandModule.cs`, and `src/Plotter.Cli/Presentation/Cli/EntityCommandModule.cs`; support `novel participant add`, `novel location add`, `novel scene add`, `novel scene set`, `novel scene list`, and `novel scene show`.
-- [ ] T032 [US1] Implement human-readable scene/entity output and actionable validation diagnostics in `src/Plotter.Cli/Presentation/Cli/TextRenderers.cs`.
-- [ ] T033 [US1] Make all US1 properties pass and verify `novel init`, `novel init --file`, the participant/location/scene initialization workflow, scene editing, persistence, and current-folder selection through `test/Plotter.PropertyTests/CliProperties/SceneCommandProperties.cs` and `test/Plotter.PropertyTests/CliProperties/WorkspaceCommandProperties.cs`.
+- [x] T029 [US1] Implement workspace initialization/opening plus scene/entity create-update-remove application services in `src/Plotter.Cli/Application/Commands/WorkspaceCommands.cs`, `src/Plotter.Cli/Application/Commands/SceneCommands.cs`, and `src/Plotter.Cli/Application/Commands/EntityCommands.cs`; support `novel init` and `novel init --file <path>`.
+- [x] T030 [US1] Implement scene reference and metadata validation in `src/Plotter.Cli/Application/Commands/SceneValidationService.cs`.
+- [x] T031 [US1] Implement initialization, scene, participant, and location CLI commands using Spectre.Console in `src/Plotter.Cli/Presentation/Cli/WorkspaceCommandModule.cs`, `src/Plotter.Cli/Presentation/Cli/SceneCommandModule.cs`, and `src/Plotter.Cli/Presentation/Cli/EntityCommandModule.cs`; support `novel participant add`, `novel location add`, `novel scene add`, `novel scene set`, `novel scene list`, and `novel scene show`.
+- [x] T032 [US1] Implement human-readable scene/entity output and actionable validation diagnostics in `src/Plotter.Cli/Presentation/Cli/TextRenderers.cs`.
+- [x] T033 [US1] Make all US1 properties pass and verify `novel init`, `novel init --file`, the participant/location/scene initialization workflow, scene editing, persistence, and current-folder selection through `test/Plotter.PropertyTests/CliProperties/SceneCommandProperties.cs` and `test/Plotter.PropertyTests/CliProperties/WorkspaceCommandProperties.cs`.
 
 **Checkpoint**: Scene context can be managed and persisted independently as the MVP.
 

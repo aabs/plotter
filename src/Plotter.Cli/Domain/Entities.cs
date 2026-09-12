@@ -33,7 +33,10 @@ public sealed record Scene(
     string? Status = null,
     string? Notes = null,
     IReadOnlyList<ContinuityAnnotation>? ContinuityAnnotations = null,
-    IReadOnlyList<Interaction>? Interactions = null)
+    IReadOnlyList<Interaction>? Interactions = null,
+    int? NarrativePosition = null,
+    string? Act = null,
+    string? Chapter = null)
 {
     public IReadOnlyList<ParticipantId> ParticipantIds { get; init; } = ParticipantIds ?? [];
     public IReadOnlyList<PlotRelationship> Plots { get; init; } = Plots ?? [];

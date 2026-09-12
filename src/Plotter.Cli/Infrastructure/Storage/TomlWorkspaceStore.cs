@@ -86,11 +86,19 @@ public sealed class TomlWorkspaceStore : INovelWorkspaceStore
             dto.Scenes[scene.Id.Value] = new TomlSceneDto
             {
                 Title = scene.Title,
+                NarrativePosition = scene.NarrativePosition,
+                Act = scene.Act,
+                Chapter = scene.Chapter,
                 StoryDateTime = scene.StoryTime?.Date is { } date ? date.ToString("O", CultureInfo.InvariantCulture) : null,
                 DurationMinutes = scene.Duration is { } duration ? duration.Value.TotalMinutes : null,
                 LocationId = scene.LocationId?.Value,
                 ParticipantIds = scene.ParticipantIds.Count == 0 ? null : scene.ParticipantIds.Select(p => p.Value).ToList(),
-                PlotIds = scene.Plots.Count == 0 ? null : scene.Plots.Select(p => p.PlotId.Value).ToList(),
+                Plots = scene.Plots.Count == 0 ? null : scene.Plots.Select(plot => new TomlPlotRelationshipDto
+                {
+                    PlotId = plot.PlotId.Value,
+                    Classification = plot.Classification.ToString().ToLowerInvariant(),
+                    Annotation = plot.Annotation,
+                }).ToList(),
                 PovParticipantId = scene.PovParticipantId?.Value,
                 Status = scene.Status,
                 Notes = scene.Notes,
@@ -130,11 +138,17 @@ public sealed class TomlWorkspaceStore : INovelWorkspaceStore
                 scene.DurationMinutes is { } minutes ? new SceneDuration(TimeSpan.FromMinutes(minutes)) : null,
                 scene.LocationId is null ? null : new LocationId(scene.LocationId),
                 scene.ParticipantIds?.Select(p => new ParticipantId(p)).ToArray(),
-                scene.PlotIds?.Select(p => new PlotRelationship(new PlotId(p), PlotThreadClassification.NotClassified)).ToArray(),
+                scene.Plots?.Where(plot => plot.PlotId is not null).Select(plot => new PlotRelationship(
+                    new PlotId(plot.PlotId!),
+                    Enum.TryParse<PlotThreadClassification>(plot.Classification, ignoreCase: true, out var classification) ? classification : PlotThreadClassification.NotClassified,
+                    plot.Annotation)).ToArray(),
                 scene.PovParticipantId is null ? null : new ParticipantId(scene.PovParticipantId),
                 scene.Status,
                 scene.Notes,
-                scene.ContinuityAnnotations?.Select(kv => new ContinuityAnnotation(kv.Key, kv.Value)).ToArray());
+                scene.ContinuityAnnotations?.Select(kv => new ContinuityAnnotation(kv.Key, kv.Value)).ToArray(),
+                NarrativePosition: scene.NarrativePosition,
+                Act: scene.Act,
+                Chapter: scene.Chapter);
 
         return workspace;
     }
@@ -195,6 +209,12 @@ public sealed class TomlWorkspaceStore : INovelWorkspaceStore
             var table = new TomlTable();
             if (scene.Title is not null)
                 table["title"] = scene.Title;
+            if (scene.NarrativePosition is { } narrativePosition)
+                table["narrative_position"] = narrativePosition;
+            if (scene.Act is not null)
+                table["act"] = scene.Act;
+            if (scene.Chapter is not null)
+                table["chapter"] = scene.Chapter;
             if (scene.StoryDateTime is not null)
                 table["story_date_time"] = scene.StoryDateTime;
             if (scene.DurationMinutes is { } minutes)
@@ -203,8 +223,18 @@ public sealed class TomlWorkspaceStore : INovelWorkspaceStore
                 table["location_id"] = scene.LocationId;
             if (scene.ParticipantIds is { Count: > 0 })
                 table["participant_ids"] = scene.ParticipantIds.ToArray();
-            if (scene.PlotIds is { Count: > 0 })
-                table["plot_ids"] = scene.PlotIds.ToArray();
+            if (scene.Plots is { Count: > 0 })
+            {
+                var scenePlots = new TomlTable();
+                foreach (var plot in scene.Plots)
+                {
+                    var plotTable = new TomlTable { ["classification"] = plot.Classification ?? "not_classified" };
+                    if (plot.Annotation is not null)
+                        plotTable["annotation"] = plot.Annotation;
+                    scenePlots[plot.PlotId!] = plotTable;
+                }
+                table["plots"] = scenePlots;
+            }
             if (scene.PovParticipantId is not null)
                 table["pov_participant_id"] = scene.PovParticipantId;
             if (scene.Status is not null)
@@ -276,11 +306,14 @@ public sealed class TomlWorkspaceStore : INovelWorkspaceStore
                     dto.Scenes[id] = new TomlSceneDto
                     {
                         Title = table.TryGetValue("title", out var sceneTitle) ? sceneTitle as string : null,
+                        NarrativePosition = table.TryGetValue("narrative_position", out var narrativePosition) && narrativePosition is long position ? (int)position : null,
+                        Act = table.TryGetValue("act", out var act) ? act as string : null,
+                        Chapter = table.TryGetValue("chapter", out var chapter) ? chapter as string : null,
                         StoryDateTime = table.TryGetValue("story_date_time", out var story) ? story as string : null,
                         DurationMinutes = table.TryGetValue("duration_minutes", out var duration) && duration is double minutes ? minutes : null,
                         LocationId = table.TryGetValue("location_id", out var location) ? location as string : null,
                         ParticipantIds = ReadStringList(table, "participant_ids"),
-                        PlotIds = ReadStringList(table, "plot_ids"),
+                        Plots = ReadPlots(table),
                         PovParticipantId = table.TryGetValue("pov_participant_id", out var pov) ? pov as string : null,
                         Status = table.TryGetValue("status", out var status) ? status as string : null,
                         Notes = table.TryGetValue("notes", out var notes) ? notes as string : null,
@@ -290,6 +323,25 @@ public sealed class TomlWorkspaceStore : INovelWorkspaceStore
                     };
 
         return dto;
+    }
+
+    private static List<TomlPlotRelationshipDto>? ReadPlots(TomlTable table)
+    {
+        if (!table.TryGetValue("plots", out var value) || value is not TomlTable plots)
+            return null;
+        var result = new List<TomlPlotRelationshipDto>();
+        foreach (var (id, plotValue) in plots)
+        {
+            if (plotValue is not TomlTable plotTable)
+                continue;
+            result.Add(new TomlPlotRelationshipDto
+            {
+                PlotId = id,
+                Classification = plotTable.TryGetValue("classification", out var classification) ? classification as string : null,
+                Annotation = plotTable.TryGetValue("annotation", out var annotation) ? annotation as string : null,
+            });
+        }
+        return result;
     }
 
     private static List<string>? ReadStringList(TomlTable table, string key)
