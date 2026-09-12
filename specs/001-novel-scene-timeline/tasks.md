@@ -167,11 +167,11 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Generate participant location sequences with and without travel models, then verify available-time and modeled-route behavior.
 
-- [ ] T066 [P] [US8] Define travel available-time, no-model, feasible-route, and no-route properties in `test/Plotter.PropertyTests/ProjectionProperties/TravelProperties.cs`.
-- [ ] T067 [US8] Implement available-time travel analysis in `src/Plotter.Cli/Application/Queries/TravelQueries.cs`.
-- [ ] T068 [US8] Implement optional coordinate/travel-time model adapters in `src/Plotter.Cli/Infrastructure/Travel/TravelModelAdapter.cs`.
-- [ ] T069 [US8] Implement travel text renderer and register `novel travel` in `src/Plotter.Cli/Presentation/Cli/TravelCommandModule.cs`.
-- [ ] T070 [US8] Add property coverage ensuring absent models never produce invented route durations in `test/Plotter.PropertyTests/CliProperties/TravelCommandProperties.cs`.
+- [x] T066 [P] [US8] Define travel available-time, no-model, feasible-route, and no-route properties in `test/Plotter.PropertyTests/ProjectionProperties/TravelProperties.cs`.
+- [x] T067 [US8] Implement available-time travel analysis in `src/Plotter.Cli/Application/Queries/TravelQueries.cs`.
+- [x] T068 [US8] Implement optional coordinate/travel-time model adapters in `src/Plotter.Cli/Infrastructure/Travel/TravelModelAdapter.cs`.
+- [x] T069 [US8] Implement travel text renderer and register `novel travel` in `src/Plotter.Cli/Presentation/Cli/TravelCommandModule.cs`.
+- [x] T070 [US8] Add property coverage ensuring absent models never produce invented route durations in `test/Plotter.PropertyTests/CliProperties/TravelCommandProperties.cs`.
 
 ---
 

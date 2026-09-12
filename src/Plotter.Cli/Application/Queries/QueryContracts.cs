@@ -65,6 +65,10 @@ public sealed record SceneCardDetail(
     TimeSpan? ElapsedSincePrevious,
     IReadOnlyList<string> Flags);
 
+public sealed record TravelStep(DateTime? Time, string? LocationId, TimeSpan? AvailableUntilNext, TimeSpan? ModeledRoute);
+
+public sealed record TravelResult(string ParticipantId, IReadOnlyList<TravelStep> Steps);
+
 public sealed record GapRow(string FromSceneId, string ToSceneId, string FromContext, string ToContext, TimeSpan? Gap, GapClass GapClass);
 
 public sealed record SceneDetailResult(

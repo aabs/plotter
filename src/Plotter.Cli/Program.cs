@@ -79,6 +79,9 @@ try
         case "continuity":
             AuditCommandModule.RunGaps(workspace);
             return;
+        case "travel":
+            TravelCommandModule.RunTravel(workspace, arguments);
+            return;
         case "where":
             LocationCommandModule.RunWhere(workspace, arguments);
             return;
