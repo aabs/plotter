@@ -14,28 +14,28 @@ public static class SceneCommandModule
         switch (operation)
         {
             case "add":
-            {
-                var id = args.ElementAtOrDefault(2) ?? throw new ArgumentException("Usage: novel scene add <scene-id>");
-                var result = SceneCommands.AddScene(workspace, id);
-                if (result.Success)
                 {
-                    await store.SaveAsync(file, workspace, cancellationToken);
-                    AnsiConsole.MarkupLine($"[green]Created scene[/] {id}");
+                    var id = args.ElementAtOrDefault(2) ?? throw new ArgumentException("Usage: novel scene add <scene-id>");
+                    var result = SceneCommands.AddScene(workspace, id);
+                    if (result.Success)
+                    {
+                        await store.SaveAsync(file, workspace, cancellationToken);
+                        AnsiConsole.MarkupLine($"[green]Created scene[/] {id}");
+                    }
+                    return result.Success ? 0 : 1;
                 }
-                return result.Success ? 0 : 1;
-            }
             case "set":
-            {
-                var id = args.ElementAtOrDefault(2) ?? throw new ArgumentException("Usage: novel scene set <scene-id> [options]");
-                var update = ParseUpdate(args);
-                var result = SceneCommands.SetScene(workspace, id, update);
-                if (result.Success)
                 {
-                    await store.SaveAsync(file, workspace, cancellationToken);
-                    AnsiConsole.MarkupLine($"[green]Updated scene[/] {id}");
+                    var id = args.ElementAtOrDefault(2) ?? throw new ArgumentException("Usage: novel scene set <scene-id> [options]");
+                    var update = ParseUpdate(args);
+                    var result = SceneCommands.SetScene(workspace, id, update);
+                    if (result.Success)
+                    {
+                        await store.SaveAsync(file, workspace, cancellationToken);
+                        AnsiConsole.MarkupLine($"[green]Updated scene[/] {id}");
+                    }
+                    return result.Success ? 0 : 1;
                 }
-                return result.Success ? 0 : 1;
-            }
             case "list":
                 TextRenderers.RenderTimeline(workspace);
                 return 0;

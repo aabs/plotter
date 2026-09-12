@@ -14,6 +14,9 @@
     <Version>0.1.0</Version>
     <Description>Manage novel scenes, timelines, participants, locations, plots, and continuity.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RepositoryUrl>https://example.invalid/plotter</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <!-- Public XML documentation is completed by the documentation task; keep the incremental build green meanwhile. -->
     <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
@@ -22,5 +25,8 @@
     <PackageReference Include="Microsoft.Extensions.Options" />
     <PackageReference Include="Spectre.Console" />
     <PackageReference Include="Tomlyn" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 </Project>

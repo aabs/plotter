@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Plotter.Cli.Domain;
 using Plotter.Cli.Infrastructure.Composition;
 using Plotter.Cli.Infrastructure.Configuration;
