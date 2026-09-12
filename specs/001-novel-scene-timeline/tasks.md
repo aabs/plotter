@@ -220,16 +220,16 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Execute one query as text and structured formats, open it in the TUI, preserve selection while changing views, and export equivalent artifacts.
 
-- [ ] T083 [P] [US12] Define text/JSON/CSV/SARIF equivalence and deterministic export properties in `test/Plotter.PropertyTests/ProjectionProperties/FormatEquivalenceProperties.cs`.
-- [ ] T084 [P] [US12] Define CLI alias equivalence, empty-result validity, and current-folder file-selection properties in `test/Plotter.PropertyTests/CliProperties/ComposableCommandProperties.cs`.
-- [ ] T085 [P] [US12] Define TUI selected-Scene-ID stability, filtered-selection fallback, keyboard-command, major-object CRUD, relationship-editing, and CLI/TUI service-equivalence properties in `test/Plotter.PropertyTests/CliProperties/TuiProperties.cs`.
-- [ ] T086 [US12] Implement shared result DTO mapping and stable text/JSON/CSV renderers in `src/Plotter.Cli/Presentation/Export/BasicExporters.cs`.
-- [ ] T087 [US12] Implement SARIF, Markdown, iCalendar, Graphviz DOT, Mermaid, HTML, SVG, and text exporters in `src/Plotter.Cli/Presentation/Export/ArtifactExporters.cs`.
-- [ ] T088 [US12] Implement graph projection by participants/locations and register export commands in `src/Plotter.Cli/Presentation/Cli/ExportCommandModule.cs`.
-- [ ] T089 [US12] Implement calendar day/week/month projections and commands in `src/Plotter.Cli/Presentation/Cli/CalendarCommandModule.cs`.
-- [ ] T090 [US12] Implement the Spectre.Console TUI layout, filters, search, ordering/view controls, date jump, lanes, audit, quit, and Enter-to-detail behavior in `src/Plotter.Cli/Presentation/Tui/PlotterTui.cs`, including create/view/update/remove flows for Scenes, Participants, Locations, Plots, Participant Groups, and Interactions.
-- [ ] T091 [US12] Implement the stable-selection state model and shared TUI query/command adapter in `src/Plotter.Cli/Presentation/Tui/TuiState.cs`, routing relationship and annotation edits through application services.
-- [ ] T092 [US12] Add CLI/TUI/export property coverage for canonical-data equivalence, selection stability, major-object CRUD, relationship creation/removal, and shared validation in `test/Plotter.PropertyTests/CliProperties/InteractiveProjectionProperties.cs`.
+- [x] T083 [P] [US12] Define text/JSON/CSV/SARIF equivalence and deterministic export properties in `test/Plotter.PropertyTests/ProjectionProperties/FormatEquivalenceProperties.cs`.
+- [x] T084 [P] [US12] Define CLI alias equivalence, empty-result validity, and current-folder file-selection properties in `test/Plotter.PropertyTests/CliProperties/ComposableCommandProperties.cs`.
+- [x] T085 [P] [US12] Define TUI selected-Scene-ID stability, filtered-selection fallback, keyboard-command, major-object CRUD, relationship-editing, and CLI/TUI service-equivalence properties in `test/Plotter.PropertyTests/CliProperties/TuiProperties.cs`.
+- [x] T086 [US12] Implement shared result DTO mapping and stable text/JSON/CSV renderers in `src/Plotter.Cli/Presentation/Export/BasicExporters.cs`.
+- [x] T087 [US12] Implement SARIF, Markdown, iCalendar, Graphviz DOT, Mermaid, HTML, SVG, and text exporters in `src/Plotter.Cli/Presentation/Export/ArtifactExporters.cs`.
+- [x] T088 [US12] Implement graph projection by participants/locations and register export commands in `src/Plotter.Cli/Presentation/Cli/ExportCommandModule.cs`.
+- [x] T089 [US12] Implement calendar day/week/month projections and commands in `src/Plotter.Cli/Presentation/Cli/CalendarCommandModule.cs`.
+- [x] T090 [US12] Implement the Spectre.Console TUI layout, filters, search, ordering/view controls, date jump, lanes, audit, quit, and Enter-to-detail behavior in `src/Plotter.Cli/Presentation/Tui/PlotterTui.cs`, including create/view/update/remove flows for Scenes, Participants, Locations, Plots, Participant Groups, and Interactions.
+- [x] T091 [US12] Implement the stable-selection state model and shared TUI query/command adapter in `src/Plotter.Cli/Presentation/Tui/TuiState.cs`, routing relationship and annotation edits through application services.
+- [x] T092 [US12] Add CLI/TUI/export property coverage for canonical-data equivalence, selection stability, major-object CRUD, relationship creation/removal, and shared validation in `test/Plotter.PropertyTests/CliProperties/InteractiveProjectionProperties.cs`.
 
 ---
 

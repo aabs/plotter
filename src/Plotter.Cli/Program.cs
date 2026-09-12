@@ -4,6 +4,7 @@ using Plotter.Cli.Infrastructure.Composition;
 using Plotter.Cli.Infrastructure.Configuration;
 using Plotter.Cli.Infrastructure.Storage;
 using Plotter.Cli.Presentation.Cli;
+using Plotter.Cli.Presentation.Tui;
 
 var (fileSelection, parsedArgs) = FileSelectionParser.Parse(args);
 var arguments = parsedArgs.ToList();
@@ -81,6 +82,20 @@ try
                 return;
             }
             InteractionCommandModule.RunHistory(workspace, arguments);
+            return;
+        case "export":
+            if (arguments.ElementAtOrDefault(1)?.Equals("graph", StringComparison.OrdinalIgnoreCase) == true)
+            {
+                ExportCommandModule.RunGraph(workspace, arguments);
+                return;
+            }
+            ExportCommandModule.RunExport(workspace, arguments);
+            return;
+        case "calendar":
+            CalendarCommandModule.RunCalendar(workspace, arguments);
+            return;
+        case "tui":
+            await PlotterTui.RunAsync(workspace, store, file);
             return;
         case "continuity":
             AuditCommandModule.RunGaps(workspace);

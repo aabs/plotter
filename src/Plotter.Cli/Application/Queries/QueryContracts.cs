@@ -65,6 +65,10 @@ public sealed record SceneCardDetail(
     TimeSpan? ElapsedSincePrevious,
     IReadOnlyList<string> Flags);
 
+public sealed record CalendarEvent(string SceneId, string? Title, DateTime? StoryDateTime, string? LocationId);
+
+public sealed record CalendarResult(IReadOnlyList<CalendarEvent> Events);
+
 public sealed record InteractionHistoryRow(string SceneId, string? Type, string? Description, IReadOnlyList<string> ParticipantIds);
 
 public sealed record InteractionHistoryResult(string ParticipantId, IReadOnlyList<InteractionHistoryRow> Rows);
