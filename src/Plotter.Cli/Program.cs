@@ -76,6 +76,14 @@ try
         case "audit":
             AuditCommandModule.RunAudit(workspace, arguments);
             return;
+        case "interaction":
+            if (arguments.ElementAtOrDefault(1)?.Equals("add", StringComparison.OrdinalIgnoreCase) == true)
+            {
+                await InteractionCommandModule.RunAddAsync(workspace, arguments, store, file);
+                return;
+            }
+            InteractionCommandModule.RunHistory(workspace, arguments);
+            return;
         case "continuity":
             AuditCommandModule.RunGaps(workspace);
             return;

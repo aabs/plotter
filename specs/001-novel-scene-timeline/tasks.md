@@ -181,10 +181,10 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Generate valid/invalid interaction records, persist them, and verify history and rejection invariants.
 
-- [ ] T071 [P] [US9] Define interaction reference-closure, edit/remove, and history-ordering properties in `test/Plotter.PropertyTests/DomainProperties/InteractionProperties.cs`.
-- [ ] T072 [US9] Implement interaction create-update-remove and participant history services in `src/Plotter.Cli/Application/Commands/InteractionCommands.cs` and `src/Plotter.Cli/Application/Queries/InteractionQueries.cs`.
-- [ ] T073 [US9] Implement interaction CLI commands and renderers in `src/Plotter.Cli/Presentation/Cli/InteractionCommandModule.cs`.
-- [ ] T074 [US9] Add property coverage for rejecting participants not assigned to a scene in `test/Plotter.PropertyTests/CliProperties/InteractionCommandProperties.cs`.
+- [x] T071 [P] [US9] Define interaction reference-closure, edit/remove, and history-ordering properties in `test/Plotter.PropertyTests/DomainProperties/InteractionProperties.cs`.
+- [x] T072 [US9] Implement interaction create-update-remove and participant history services in `src/Plotter.Cli/Application/Commands/InteractionCommands.cs` and `src/Plotter.Cli/Application/Queries/InteractionQueries.cs`.
+- [x] T073 [US9] Implement interaction CLI commands and renderers in `src/Plotter.Cli/Presentation/Cli/InteractionCommandModule.cs`.
+- [x] T074 [US9] Add property coverage for rejecting participants not assigned to a scene in `test/Plotter.PropertyTests/CliProperties/InteractionCommandProperties.cs`.
 
 ---
 

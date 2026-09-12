@@ -65,6 +65,10 @@ public sealed record SceneCardDetail(
     TimeSpan? ElapsedSincePrevious,
     IReadOnlyList<string> Flags);
 
+public sealed record InteractionHistoryRow(string SceneId, string? Type, string? Description, IReadOnlyList<string> ParticipantIds);
+
+public sealed record InteractionHistoryResult(string ParticipantId, IReadOnlyList<InteractionHistoryRow> Rows);
+
 public sealed record TravelStep(DateTime? Time, string? LocationId, TimeSpan? AvailableUntilNext, TimeSpan? ModeledRoute);
 
 public sealed record TravelResult(string ParticipantId, IReadOnlyList<TravelStep> Steps);
