@@ -96,11 +96,11 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Generate participant scenes across times/locations, run itinerary and lane queries, and verify every occurrence and empty cell is represented.
 
-- [ ] T040 [P] [US3] Define itinerary ordering, lane completeness, repeated same-time occurrence, empty-cell, group, character, and location-filter properties in `test/Plotter.PropertyTests/ProjectionProperties/CharacterContinuityProperties.cs`.
-- [ ] T041 [US3] Implement participant itinerary and lane query services in `src/Plotter.Cli/Application/Queries/CharacterContinuityQueries.cs`.
-- [ ] T042 [US3] Implement itinerary/lane text renderers in `src/Plotter.Cli/Presentation/Cli/CharacterRenderers.cs`.
-- [ ] T043 [US3] Register `novel character timeline/show` and `novel scenes lanes`/`novel lanes` commands in `src/Plotter.Cli/Presentation/Cli/CharacterCommandModule.cs`.
-- [ ] T044 [US3] Add property coverage for empty filters and participant-group membership in `test/Plotter.PropertyTests/CliProperties/CharacterCommandProperties.cs`.
+- [x] T040 [P] [US3] Define itinerary ordering, lane completeness, repeated same-time occurrence, empty-cell, group, character, and location-filter properties in `test/Plotter.PropertyTests/ProjectionProperties/CharacterContinuityProperties.cs`.
+- [x] T041 [US3] Implement participant itinerary and lane query services in `src/Plotter.Cli/Application/Queries/CharacterContinuityQueries.cs`.
+- [x] T042 [US3] Implement itinerary/lane text renderers in `src/Plotter.Cli/Presentation/Cli/CharacterRenderers.cs`.
+- [x] T043 [US3] Register `novel character timeline/show` and `novel scenes lanes`/`novel lanes` commands in `src/Plotter.Cli/Presentation/Cli/CharacterCommandModule.cs`.
+- [x] T044 [US3] Add property coverage for empty filters and participant-group membership in `test/Plotter.PropertyTests/CliProperties/CharacterCommandProperties.cs`.
 
 ---
 

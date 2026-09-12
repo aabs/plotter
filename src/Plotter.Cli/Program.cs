@@ -49,7 +49,18 @@ try
             await SceneCommandModule.RunAsync(workspace, arguments, store, file);
             return;
         case "scenes":
+            if (arguments.ElementAtOrDefault(1)?.Equals("lanes", StringComparison.OrdinalIgnoreCase) == true)
+            {
+                CharacterCommandModule.RunLanes(workspace, arguments);
+                return;
+            }
             TimelineCommandModule.RunScenesTimeline(workspace, arguments);
+            return;
+        case "character":
+            CharacterCommandModule.RunCharacter(workspace, arguments);
+            return;
+        case "lanes":
+            CharacterCommandModule.RunLanes(workspace, arguments);
             return;
         case "timeline":
             TimelineCommandModule.RunTimeline(workspace, arguments);

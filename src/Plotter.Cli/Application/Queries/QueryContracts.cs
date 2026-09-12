@@ -12,6 +12,18 @@ public sealed record ManuscriptRow(string SceneId, string? Title, string? Act, s
 
 public sealed record ManuscriptResult(IReadOnlyList<ManuscriptRow> Rows);
 
+public sealed record ItineraryRow(DateTime? Time, string? LocationId, string SceneId, string? Title);
+
+public sealed record ItineraryResult(string ParticipantId, IReadOnlyList<ItineraryRow> Rows);
+
+public sealed record LaneOccurrence(string SceneId, string? LocationId);
+
+public sealed record LaneCell(IReadOnlyList<LaneOccurrence> Occurrences);
+
+public sealed record LaneRow(DateTime? Time, IReadOnlyList<LaneCell> Cells);
+
+public sealed record LaneResult(IReadOnlyList<string> ParticipantIds, IReadOnlyList<LaneRow> Rows);
+
 public sealed record SceneDetailResult(
     SceneId SceneId,
     string? Title,
