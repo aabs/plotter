@@ -81,12 +81,12 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Generate scenes with story and manuscript ordering, run each view, and verify ordering/grouping/classification invariants.
 
-- [ ] T034 [P] [US2] Define chronological ordering, inclusive date-range, unknown-time preservation, and tie-breaking properties in `test/Plotter.PropertyTests/ProjectionProperties/TimelineProperties.cs`.
-- [ ] T035 [P] [US2] Define manuscript-order Act/chapter grouping and flashback classification properties in `test/Plotter.PropertyTests/ProjectionProperties/ManuscriptOrderProperties.cs`.
-- [ ] T036 [US2] Implement shared timeline/manuscript query services in `src/Plotter.Cli/Application/Queries/TimelineQueries.cs`.
-- [ ] T037 [US2] Implement stable text timeline and manuscript renderers in `src/Plotter.Cli/Presentation/Cli/TimelineRenderers.cs`.
-- [ ] T038 [US2] Register `novel timeline`, `novel scenes timeline`, and `novel scene list --order manuscript` in `src/Plotter.Cli/Presentation/Cli/TimelineCommandModule.cs`.
-- [ ] T039 [US2] Add CLI property coverage for empty ranges, identical dates, missing dates, date bounds, and `[FLASHBACK]` output in `test/Plotter.PropertyTests/CliProperties/TimelineCommandProperties.cs`.
+- [x] T034 [P] [US2] Define chronological ordering, inclusive date-range, unknown-time preservation, and tie-breaking properties in `test/Plotter.PropertyTests/ProjectionProperties/TimelineProperties.cs`.
+- [x] T035 [P] [US2] Define manuscript-order Act/chapter grouping and flashback classification properties in `test/Plotter.PropertyTests/ProjectionProperties/ManuscriptOrderProperties.cs`.
+- [x] T036 [US2] Implement shared timeline/manuscript query services in `src/Plotter.Cli/Application/Queries/TimelineQueries.cs`.
+- [x] T037 [US2] Implement stable text timeline and manuscript renderers in `src/Plotter.Cli/Presentation/Cli/TimelineRenderers.cs`.
+- [x] T038 [US2] Register `novel timeline`, `novel scenes timeline`, and `novel scene list --order manuscript` in `src/Plotter.Cli/Presentation/Cli/TimelineCommandModule.cs`.
+- [x] T039 [US2] Add CLI property coverage for empty ranges, identical dates, missing dates, date bounds, and `[FLASHBACK]` output in `test/Plotter.PropertyTests/CliProperties/TimelineCommandProperties.cs`.
 
 ---
 

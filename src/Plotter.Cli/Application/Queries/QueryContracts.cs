@@ -4,9 +4,13 @@ namespace Plotter.Cli.Application.Queries;
 
 public sealed record SceneListQuery(string? Order = null, string? From = null, string? To = null, string? Character = null);
 
-public sealed record SceneRow(string SceneId, string? Title, DateTime? StoryDateTime, string? LocationId, IReadOnlyList<string> ParticipantIds);
+public sealed record SceneRow(string SceneId, string? Title, DateTime? StoryDateTime, string? LocationId, IReadOnlyList<string> ParticipantIds, string? TemporalStatus = null);
 
 public sealed record SceneListResult(IReadOnlyList<SceneRow> Scenes);
+
+public sealed record ManuscriptRow(string SceneId, string? Title, string? Act, string? Chapter, DateTime? StoryDateTime, bool IsFlashback);
+
+public sealed record ManuscriptResult(IReadOnlyList<ManuscriptRow> Rows);
 
 public sealed record SceneDetailResult(
     SceneId SceneId,

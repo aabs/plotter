@@ -94,7 +94,7 @@ public static class DomainGenerators
                 "draft",
                 $"Notes {index}",
                 NarrativePosition: index,
-                Act: $"Act {index % 3 + 1}",
+                Act: $"Act {index / 3 + 1}",
                 Chapter: $"Ch {index % 12 + 1}");
         }
 

@@ -41,10 +41,18 @@ try
             EntityCommandModule.RunAddLocation(workspace, arguments);
             break;
         case "scene":
+            if (arguments.ElementAtOrDefault(1)?.Equals("list", StringComparison.OrdinalIgnoreCase) == true)
+            {
+                TimelineCommandModule.RunSceneList(workspace, arguments);
+                return;
+            }
             await SceneCommandModule.RunAsync(workspace, arguments, store, file);
             return;
+        case "scenes":
+            TimelineCommandModule.RunScenesTimeline(workspace, arguments);
+            return;
         case "timeline":
-            TextRenderers.RenderTimeline(workspace);
+            TimelineCommandModule.RunTimeline(workspace, arguments);
             return;
         default:
             throw new InvalidOperationException($"Unknown command '{command}'. Run 'novel help'.");
