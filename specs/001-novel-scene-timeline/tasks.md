@@ -207,10 +207,10 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Save a workspace, copy it to another folder, reopen it without network access, and verify canonical equivalence.
 
-- [ ] T079 [P] [US11] Define workspace-copy, reopen, malformed-input, incompatible-version, and source-preservation properties in `test/Plotter.PropertyTests/PersistenceProperties/WorkspaceRecoveryProperties.cs`.
-- [ ] T080 [US11] Implement format/version compatibility diagnostics and source-preserving load failures in `src/Plotter.Cli/Infrastructure/Storage/WorkspaceCompatibilityService.cs`.
-- [ ] T081 [US11] Implement explicit `--file`/path selection and resolved-file diagnostics in `src/Plotter.Cli/Presentation/Cli/FileSelectionOptions.cs`.
-- [ ] T082 [US11] Add end-to-end property coverage for copy/reopen/offline workflows in `test/Plotter.PropertyTests/CliProperties/WorkspaceCommandProperties.cs`.
+- [x] T079 [P] [US11] Define workspace-copy, reopen, malformed-input, incompatible-version, and source-preservation properties in `test/Plotter.PropertyTests/PersistenceProperties/WorkspaceRecoveryProperties.cs`.
+- [x] T080 [US11] Implement format/version compatibility diagnostics and source-preserving load failures in `src/Plotter.Cli/Infrastructure/Storage/WorkspaceCompatibilityService.cs`.
+- [x] T081 [US11] Implement explicit `--file`/path selection and resolved-file diagnostics in `src/Plotter.Cli/Presentation/Cli/FileSelectionOptions.cs`.
+- [x] T082 [US11] Add end-to-end property coverage for copy/reopen/offline workflows in `test/Plotter.PropertyTests/CliProperties/WorkspaceCommandProperties.cs`.
 
 ---
 

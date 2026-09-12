@@ -1,8 +1,11 @@
 using FsCheck;
 using FsCheck.Xunit;
 using Plotter.Cli.Application.Commands;
+using Plotter.Cli.Domain;
 using Plotter.Cli.Infrastructure.Storage;
+using Plotter.Cli.Presentation.Cli;
 using Plotter.PropertyTests.Generators;
+using Plotter.PropertyTests.Oracles;
 
 namespace Plotter.PropertyTests.CliProperties;
 
@@ -26,20 +29,36 @@ public sealed class WorkspaceCommandProperties
     }
 
     [Property(Arbitrary = new[] { typeof(DomainGenerators) })]
-    public bool InitThenOpenYieldsEmptyWorkspace()
+    public bool CopyReopenOfflinePreservesWorkspace(NovelWorkspace workspace)
     {
         var store = new TomlWorkspaceStore();
-        var path = Path.Combine(Path.GetTempPath(), $"plotter-{Guid.NewGuid():N}.toml");
+        var pathA = Path.Combine(Path.GetTempPath(), $"plotter-{Guid.NewGuid():N}.toml");
+        var pathB = Path.Combine(Path.GetTempPath(), $"plotter-{Guid.NewGuid():N}.toml");
         try
         {
-            new WorkspaceCommands(store).InitAsync(path).GetAwaiter().GetResult();
-            var workspace = new WorkspaceCommands(store).OpenAsync(path).GetAwaiter().GetResult();
-            return workspace.Scenes.Count == 0 && workspace.Participants.Count == 0 && workspace.Locations.Count == 0;
+            new WorkspaceCommands(store).SaveAsync(pathA, workspace).GetAwaiter().GetResult();
+            File.Copy(pathA, pathB);
+            var loaded = new WorkspaceCommands(store).OpenAsync(pathB).GetAwaiter().GetResult();
+            return ReferenceOracles.CanonicalText(loaded) == ReferenceOracles.CanonicalText(workspace);
         }
         finally
         {
-            if (File.Exists(path))
-                File.Delete(path);
+            if (File.Exists(pathA)) File.Delete(pathA);
+            if (File.Exists(pathB)) File.Delete(pathB);
         }
+    }
+
+    [Property(Arbitrary = new[] { typeof(DomainGenerators) })]
+    public bool ExplicitFileSelectionParses(SceneId fileName)
+    {
+        var (options, remaining) = FileSelectionParser.Parse(["--file", fileName.Value, "init"]);
+        return options.ExplicitPath == fileName.Value && remaining.SequenceEqual(["init"]);
+    }
+
+    [Property(Arbitrary = new[] { typeof(DomainGenerators) })]
+    public bool DefaultFileSelectionHasNoPath()
+    {
+        var (options, remaining) = FileSelectionParser.Parse(["timeline"]);
+        return options.ExplicitPath is null && remaining.SequenceEqual(["timeline"]);
     }
 }

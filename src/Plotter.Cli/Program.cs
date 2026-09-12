@@ -5,11 +5,9 @@ using Plotter.Cli.Infrastructure.Configuration;
 using Plotter.Cli.Infrastructure.Storage;
 using Plotter.Cli.Presentation.Cli;
 
-var arguments = args.ToList();
-var fileOption = arguments.IndexOf("--file");
-var explicitFile = fileOption >= 0 && fileOption + 1 < arguments.Count ? arguments[fileOption + 1] : null;
-if (fileOption >= 0)
-    arguments.RemoveRange(fileOption, Math.Min(2, arguments.Count - fileOption));
+var (fileSelection, parsedArgs) = FileSelectionParser.Parse(args);
+var arguments = parsedArgs.ToList();
+var explicitFile = fileSelection.ExplicitPath;
 
 using var provider = ServiceRegistration.Build();
 var resolver = provider.GetRequiredService<INovelFileResolver>();
