@@ -90,6 +90,19 @@ try
         case "travel":
             TravelCommandModule.RunTravel(workspace, arguments);
             return;
+        case "plot":
+            switch (arguments.ElementAtOrDefault(1)?.ToLowerInvariant())
+            {
+                case "add":
+                    PlotCommandModule.RunAdd(workspace, arguments);
+                    return;
+                case "remove":
+                    PlotCommandModule.RunRemove(workspace, arguments);
+                    return;
+                default:
+                    PlotCommandModule.RunList(workspace);
+                    return;
+            }
         case "where":
             LocationCommandModule.RunWhere(workspace, arguments);
             return;

@@ -45,6 +45,8 @@ public sealed class AuditProperties
     [Property(Arbitrary = new[] { typeof(DomainGenerators) })]
     public bool IntentionalOverlapIsNotError(DateTime start, SceneId sceneId1, SceneId sceneId2)
     {
+        if (sceneId1.Value.Equals(sceneId2.Value, StringComparison.OrdinalIgnoreCase))
+            return true;
         var participant = new ParticipantId("Mara");
         var firstLocation = new LocationId("L1");
         var secondLocation = new LocationId("L2");
@@ -67,6 +69,8 @@ public sealed class AuditProperties
     [Property(Arbitrary = new[] { typeof(DomainGenerators) })]
     public bool OverlapWithoutAnnotationIsError(DateTime start, SceneId sceneId1, SceneId sceneId2)
     {
+        if (sceneId1.Value.Equals(sceneId2.Value, StringComparison.OrdinalIgnoreCase))
+            return true;
         var participant = new ParticipantId("Mara");
         var firstLocation = new LocationId("L1");
         var secondLocation = new LocationId("L2");

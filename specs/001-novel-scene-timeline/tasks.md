@@ -194,10 +194,10 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Generate plots with valid/invalid bounds and scene associations, then verify persistence, listing, and rejection invariants.
 
-- [ ] T075 [P] [US10] Define Plot ID, bound-order, scene-reference, and rename/remove properties in `test/Plotter.PropertyTests/DomainProperties/PlotProperties.cs`.
-- [ ] T076 [US10] Implement Plot and scene-to-Plot application services in `src/Plotter.Cli/Application/Commands/PlotCommands.cs`.
-- [ ] T077 [US10] Implement Plot CLI commands and renderers in `src/Plotter.Cli/Presentation/Cli/PlotCommandModule.cs`.
-- [ ] T078 [US10] Add property coverage for rejecting empty/duplicate Plot IDs and end-before-start bounds in `test/Plotter.PropertyTests/CliProperties/PlotCommandProperties.cs`.
+- [x] T075 [P] [US10] Define Plot ID, bound-order, scene-reference, and rename/remove properties in `test/Plotter.PropertyTests/DomainProperties/PlotProperties.cs`.
+- [x] T076 [US10] Implement Plot and scene-to-Plot application services in `src/Plotter.Cli/Application/Commands/PlotCommands.cs`.
+- [x] T077 [US10] Implement Plot CLI commands and renderers in `src/Plotter.Cli/Presentation/Cli/PlotCommandModule.cs`.
+- [x] T078 [US10] Add property coverage for rejecting empty/duplicate Plot IDs and end-before-start bounds in `test/Plotter.PropertyTests/CliProperties/PlotCommandProperties.cs`.
 
 ---
 
