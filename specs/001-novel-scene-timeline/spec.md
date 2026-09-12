@@ -422,6 +422,8 @@ As a novelist or editor, I want consistent commands, interactive browsing, and d
 5. **Given** canonical scene data, **When** the writer exports Markdown, CSV, JSON, iCalendar, Graphviz DOT, Mermaid, HTML, SVG, or terminal text, **Then** the artifact is derived from the canonical data and does not create a separate editable data model.
 6. **Given** a new installation, **When** the writer follows the primary workflow, **Then** `novel timeline`, `novel scene show S034`, `novel character timeline Mara`, and `novel audit` provide the initial chronological, detail, character-continuity, and problem-finding views.
 7. **Given** an initialized workspace, **When** the writer uses the TUI, **Then** the writer can create, view, update, and remove Scenes, Participants, Locations, Plots, Participant Groups, and Interactions, and can create or remove their supported relationships and annotations through TUI actions backed by the same application services as the CLI.
+8. **Given** a new user, **When** they follow the getting-started guide, tutorials, and command reference, **Then** they can initialize a workspace, create scene context, run a continuity view, and understand the available output formats without consulting source code.
+9. **Given** a developer contributing to the tool, **When** they read the developer documentation, **Then** they can understand the architecture, canonical TOML model, query/projection boundaries, testing invariants, task workflow, and extension points.
 
 Example TUI layout:
 
@@ -585,6 +587,12 @@ Supported TUI keys include `j`/`k` for scene movement, Enter for details, `/` fo
 - **FR-020f**: TUI create and update actions MUST use the same validation, persistence, and application services as equivalent CLI commands.
 - **FR-021**: The tool MUST support calendar projections with `novel calendar --day`, `--week`, and `--month` views.
 - **FR-021a**: The initial release MUST prioritize `novel scene list --order manuscript`, `novel timeline --order story-time`, `novel scene show <id>`, `novel character timeline <name>`, `novel location timeline <name>`, `novel audit time`, `novel audit participants`, calendar views, JSON/CSV export, and the TUI over those queries.
+- **FR-022**: The project MUST provide detailed user documentation covering installation, workspace initialization, current-folder and explicit-file selection, command vocabulary, options, output formats, errors, and TUI interactions.
+- **FR-022a**: The documentation MUST include a getting-started guide that validates the `novel init` workflow and first scene attribution.
+- **FR-022b**: The documentation MUST include task-oriented tutorials for scene management, chronological and manuscript views, character/location continuity, plot-thread analysis, audits, travel analysis, TUI workflows, and exports.
+- **FR-023**: The project MUST provide developer documentation describing the architecture, canonical TOML data model, domain/application/presentation boundaries, query and projection contracts, dependency management, testing invariants, TDD workflow, and contribution process.
+- **FR-024**: User and developer documentation MUST identify the canonical source of truth and explain that TUI views and exports are projections over the same application services.
+- **FR-025**: Documentation examples and command references MUST be validated against the supported CLI/TUI contracts before release.
 
 ### Key Entities
 
@@ -634,6 +642,9 @@ Supported TUI keys include `j`/`k` for scene movement, Enter for details, `/` fo
 - **SC-018**: A script or editor integration can consume stable JSON or CSV results from supported queries without parsing human-oriented prose.
 - **SC-019**: A writer can move from a scene list to the same scene's detail card in the TUI without losing selection when changing views.
 - **SC-020**: At least 95% of supported exported scene records match the corresponding canonical TOML data after round-trip inspection.
+- **SC-021**: A new user can complete workspace initialization and first scene attribution by following the getting-started guide without consulting source code.
+- **SC-022**: The documentation covers 100% of supported top-level commands, required options, output formats, and TUI key actions at release.
+- **SC-023**: A developer can identify the canonical data model, application boundaries, property-test strategy, and contribution workflow from the developer documentation without reverse-engineering the source tree.
 
 ## Assumptions
 

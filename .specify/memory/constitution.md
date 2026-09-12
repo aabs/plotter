@@ -1,7 +1,16 @@
 # Engineering Constitution
 ## Agentic
-- AI-001 [MANDATORY]: Never leave temporary files in the repo after they are no longer in use.
-- AI-002 [MANDATORY]: When developing diagnostic, experimental or temporary test code, make sure it is created and run somewhere other than the source repo.  This prevents dead code being left lying around.
+- AI-002: When diagnostic, experimental, or temporary test code is required, it shall be created and run outside the source repository.
+- AI-003: When requirements are ambiguous, at least one clarifying question shall be asked before implementation.
+- AI-004: Before implementation starts, explicit acceptance criteria shall be defined and used as the completion gate.
+- AI-005: Each behavior claim in the completion report shall be backed by code evidence, test output, or documentation evidence.
+- AI-006: When information is uncertain, uncertainty shall be stated explicitly and assumptions shall not be presented as facts.
+- AI-007: When an API, file, symbol, or command cannot be verified, it shall not be asserted as existing.
+- AI-008: For each requested change, only the smallest set of edits required to satisfy the request shall be applied.
+- AI-009: When editing existing code, established project conventions and architecture boundaries shall be preserved.
+- AI-010: After code changes, relevant tests, lint checks, or build checks shall be executed and results shall be reported.
+- AI-011: When checks fail, the failure cause and next corrective action shall be reported, and no additional feature work shall be performed.
+- AI-012: Final code output shall not include dead code, placeholder logic, or commented-out alternatives.
 ## Development
 - CAR-01 [MANDATORY]: Use `async` and `await` for naturally asynchronous operations and return `Task` or `Task<T>` by default.
 - CAR-02 [MANDATORY]: Accept a `CancellationToken` in cancellable async APIs and pass it through to all cancellable downstream calls.
@@ -48,99 +57,85 @@
 - CFT-07 [MANDATORY]: Express nullability intent explicitly in API signatures using nullable annotations (for example, `string?`) and related nullability attributes where needed.
 - CFT-08 [MANDATORY]: Do not suppress nullable warnings (for example, with `!` or pragma directives) unless the exact reason is documented at the call site.
 - CFT-09 [MANDATORY]: Default to the narrowest visibility (`private` or `internal`) and widen to `public` only when a real consumer requires it.
-## Testing
-- PBT-01 [MANDATORY]: The standard property based testing (PBT) stack is:
-  - `FsCheck` for property based testing
-  - `FsCheck.XUnit` for property based testing integration into xunit
-- PBT-03 [MANDATORY]: Property Based Tests should be the default approach for testing that a SUT is broadly correct,
-- PBT-04 [MANDATORY]: Unit tests should be reserved for regression cases, to test a specific case that is known to have previously caused issues.
-- PBT-05 [MANDATORY]: Never just test single-point scenarios and  happy paths, instead use a Property Based Tests that will test all positive, negative and edge cases.
-- PBT-06 [MANDATORY]: Define properties as universal rules that must hold for all valid inputs, rather than relying on specific example cases.
-- PBT-07 [MANDATORY]: Design generators to produce diverse, realistic, and edge-case inputs across the full input space.
-- PBT-08 [MANDATORY]: Ensure failing cases can be minimized automatically through shrinking to aid debugging.
-- PBT-09 [MANDATORY]: Specify preconditions clearly or constrain generators so properties are only evaluated in valid domains.
-- PBT-10 [MANDATORY]: Keep tests deterministic and reproducible by controlling randomness and eliminating hidden state or side effects.
-- PBT-11 [MANDATORY]: Use strong oracles, models, or metamorphic relationships to validate correctness beyond simple assertions.
-
-  - Every property must have an oracle: a mechanical way to decide pass/fail that is stronger than “doesn’t throw” or “looks plausible”.
-  - Prefer a reference (spec) model oracle when you can: compute expected behaviour using a simpler, obviously-correct implementation and compare.
-  - If you can’t compute the exact expected output, use a metamorphic oracle: apply a transformation to inputs and assert a predictable relationship between outputs.
-  - Use multiple weak oracles together (invariants + metamorphic + cross-check) rather than one weak check.
-  - Fail with evidence: when a property fails, ensure the counterexample is informative (shrinks well; includes classification/labels).
-- PBT-12 [MANDATORY]: When making significant changes to a pre-existing unit test, convert it to a Property based test that tests a whole class of invariants and pre and post conditions. 
-- TDD-001 [MANDATORY]: You MUST practice test-first development.  Follow the process of "Red-Green-Refactor"
-
-  The Rules of TDD are:
-  - Start with a PBT test that fails.
-  - Make the smallest change needed to make that test pass.
-  - Keep each step tiny so you focus on one thing at a time.
-
-  Never get a failing test to pass by masking its failure.  Only a valid addition of functionality counts.
-- TDD-002 [MANDATORY]: Test code should be developed first, NEVER in retrospect.
-- TDD-003 [MANDATORY]: Observe a test failing first, before implementing the application code that makes it pass.
-- TDD-004 [MANDATORY]: When a test finally passes, refactor the new code to ensure it is clean and has no technical debt.
-- UTR-002: Avoid testing internal implementation details and avoid depending on concrete implementations where looser behavioral validation is possible.
-- UTR-003: Never mask failing tests with broad `try` or `catch` blocks or "success assertions".
-- UTR-004: Failing tests indentify outstanding work and should never be suppressed
 ## Performance
-- PERF-01 [MANDATORY]: Measure before and after every non-trivial performance optimization.
-- PERF-02 [MANDATORY]: Optimize only code paths that are proven hot or materially user-visible.
-- PERF-03 [MANDATORY]: Never trade away correctness, determinism, or observability for performance.
-- PERF-04 [MANDATORY]: Avoid unnecessary allocations in hot paths.
-- PERF-05 [MANDATORY]: Avoid hidden boxing in hot paths.
-- PERF-06 [MANDATORY]: Do not use allocation-heavy LINQ or iterator chains in hot paths when a simpler loop is materially cheaper.
-- PERF-07 [MANDATORY]: Minimize transient string creation in hot paths.
-- PERF-08 [MANDATORY]: Use span-based parsing and formatting APIs where they materially reduce copying or allocation.
-- PERF-09: Use Span<T> and ReadOnlySpan<T> only where they improve performance without making ownership or lifetime unsafe or unclear.
-- PERF-10: Use Memory<T> and ReadOnlyMemory<T> only where buffer lifetime must cross async or heap boundaries.
-- PERF-11 [MANDATORY]: Avoid copying large buffers or collections when a safe slice, view, or reference is sufficient.
-- PERF-12: Use stackalloc only for small, bounded, short-lived buffers.
-- PERF-13: Use ArrayPool<T> when frequent buffer allocation creates measurable GC pressure.
-- PERF-14: Use object pooling only for objects that are expensive to create or reset and are used predictably at high frequency.
-- PERF-15 [MANDATORY]: Always return rented or pooled resources promptly and exactly once.
-- PERF-16 [MANDATORY]: Do not expose pooled buffers or objects beyond the lifetime in which they are valid to use.
-- PERF-17 [MANDATORY]: Use async and await for naturally asynchronous I/O-bound operations.
-- PERF-18 [MANDATORY]: Do not block threads on asynchronous work in throughput-sensitive code paths.
-- PERF-19: Use ValueTask only when measurement shows that avoiding Task allocation is materially beneficial.
-- PERF-20 [MANDATORY]: Propagate CancellationToken in long-running or potentially blocking operations to avoid wasted work.
-- PERF-21 [MANDATORY]: Use structured logging and avoid expensive log message construction when the log level is disabled.
-- PERF-22 [MANDATORY]: Do not use exceptions for normal control flow in hot paths.
-- PERF-23 [MANDATORY]: Validate arguments and fail early before expensive work begins.
-- PERF-24 [MANDATORY]: Choose collection types based on required lookup, iteration, mutation, and allocation characteristics.
-- PERF-25 [MANDATORY]: Avoid multiple enumeration of the same sequence in hot paths.
-- PERF-26 [MANDATORY]: Prefer contiguous data access patterns when they materially improve cache locality.
-- PERF-27: Use structs only when value semantics and measured allocation or locality benefits justify them.
-- PERF-28: Use readonly struct for immutable value types that are frequently copied or passed by reference.
-- PERF-29 [MANDATORY]: Prefer immutability by default, but avoid defensive copying in hot paths unless correctness requires it.
-- PERF-30 [MANDATORY]: Prefer generic, type-safe code over object-based abstractions when object-based code would box or allocate materially more.
-- PERF-31 [MANDATORY]: Avoid unnecessary virtual dispatch in hot paths when a simpler and equally maintainable alternative exists.
-- PERF-32 [MANDATORY]: Avoid runtime reflection in hot paths.
-- PERF-33: Prefer source generation over runtime reflection or runtime code discovery where it materially improves startup or throughput.
-- PERF-34 [MANDATORY]: Choose serialization and deserialization paths that minimize allocation, copying, and intermediate materialization.
-- PERF-35 [MANDATORY]: Stream or pipe large payloads instead of fully materializing them when full buffering is unnecessary.
-- PERF-36 [MANDATORY]: Design hot-path code to reduce GC pressure rather than relying on forced collection.
-- PERF-37 [MANDATORY]: Do not call GC.Collect in production code as a performance strategy.
-- PERF-38 [MANDATORY]: Do not introduce parallelism unless the workload is safe, partitionable, and measurably faster under realistic contention.
-- PERF-39 [MANDATORY]: Avoid shared mutable state and lock contention in throughput-sensitive code.
-- PERF-40: Use SIMD, hardware intrinsics, or vectorized APIs only when measurement shows a clear benefit and portability remains acceptable.
-- PERF-41 [MANDATORY]: Keep hot loops simple, branch-light, and allocation-free where practical.
-- PERF-42 [MANDATORY]: Keep hot-path assumptions explicit and validate them outside the hot loop where possible.
-- PERF-43: Change tiered compilation, quick JIT, or compilation settings only when benchmark evidence justifies it.
-- PERF-44: Make libraries trimming-compatible when they are intended for trimmed deployments.
-- PERF-45: Use Native AOT only when startup time, memory footprint, deployment model, or scale characteristics justify its constraints.
-- PERF-46: Avoid dynamic code paths that prevent trimming or Native AOT where those deployment modes are required.
-- PERF-47 [MANDATORY]: Use profiling and production-safe telemetry to locate CPU, memory, allocation, and latency bottlenecks.
-- PERF-48 [MANDATORY]: Protect important performance characteristics with repeatable benchmarks or regression checks.
-- PERF-49 [MANDATORY]: Design APIs so efficient usage is the default and expensive usage is explicit.
-- PERF-50 [MANDATORY]: Prefer the simplest implementation that meets measured performance goals.
+- PAC-001 [MANDATORY]: For naturally asynchronous I/O-bound work, asynchronous APIs with async/await shall be used.
+- PAC-002 [MANDATORY]: Throughput-sensitive code paths shall not block threads while waiting for asynchronous operations.
+- PAC-003: ValueTask shall be used only when measurements show material allocation benefit and usage semantics are correct for ValueTask consumption.
+- PAC-004 [MANDATORY]: Long-running or potentially blocking operations shall accept and propagate CancellationToken.
+- PAC-005 [MANDATORY]: Parallelism shall be introduced only when the workload is thread-safe, partitionable, and measurably faster under realistic contention.
+- PAC-006 [MANDATORY]: Throughput-sensitive code shall minimize shared mutable state and lock contention.
+- PCV-001 [MANDATORY]: Hot loops shall remain simple, branch-light, and allocation-free where practical.
+- PCV-002 [MANDATORY]: Hot-loop assumptions shall be explicit, and invariant checks shall be validated outside the loop when possible.
+- PCV-003: SIMD, hardware intrinsics, or vectorized APIs shall be used only when measurement shows clear benefit and target-platform portability remains acceptable.
+- PDA-001 [MANDATORY]: Collection types shall be selected according to required lookup, iteration, mutation, and allocation characteristics.
+- PDA-002 [MANDATORY]: Hot-path logic shall not enumerate the same sequence multiple times.
+- PDA-003 [MANDATORY]: When measurements show cache-locality benefit, contiguous data-access patterns shall be preferred.
+- PDA-004: Structs shall be used only when value semantics and measured allocation or locality benefits justify them; immutable frequently copied value types shall be readonly struct.
+- PDA-005 [MANDATORY]: Immutability shall be the default design, and defensive copying on hot paths shall be used only when required for correctness.
+- PDA-006 [MANDATORY]: Generic type-safe implementations shall be preferred over object-based abstractions when object-based designs materially increase boxing or allocation.
+- PDA-007 [MANDATORY]: Hot paths shall avoid unnecessary virtual dispatch when an equally maintainable lower-overhead alternative exists.
+- PDA-008 [MANDATORY]: Public APIs shall make efficient usage the default path and expensive behavior explicit.
+- PIS-001 [MANDATORY]: Serialization and deserialization paths shall minimize allocation, copying, and intermediate materialization.
+- PIS-002 [MANDATORY]: When full buffering is unnecessary for large payloads, data shall be streamed or piped instead of fully materialized.
+- PIS-003 [MANDATORY]: Structured logging shall be used, and expensive log message construction shall be skipped when the log level is disabled.
+- PIS-004 [MANDATORY]: Exceptions shall not be used as normal control flow on hot paths.
+- PIS-005 [MANDATORY]: Arguments and preconditions shall be validated before expensive work begins.
+- PMA-001 [MANDATORY]: Hot-path code shall avoid unnecessary allocations and shall keep allocation rate low enough to prevent avoidable GC pressure.
+- PMA-002 [MANDATORY]: Hot-path code shall avoid hidden boxing.
+- PMA-003 [MANDATORY]: When a hot path is allocation-sensitive, allocation-heavy LINQ or iterator chains shall be replaced with materially cheaper loops.
+- PMA-004 [MANDATORY]: Hot-path code shall minimize transient string allocation.
+- PMA-005 [MANDATORY]: When parsing or formatting on hot paths, span-based APIs shall be used when they measurably reduce copying or allocation.
+- PMA-006: Span<T> and ReadOnlySpan<T> shall be used only when ownership and lifetime remain safe and clear.
+- PMA-007: Memory<T> and ReadOnlyMemory<T> shall be used when buffer lifetime must cross async or heap boundaries.
+- PMA-008 [MANDATORY]: Large buffers and collections shall not be copied when a safe slice, view, or reference is sufficient.
+- PMA-009: stackalloc shall be used only for small, bounded, short-lived buffers.
+- PMA-010: ArrayPool<T> shall be used when measured allocation patterns show frequent buffer churn causing GC pressure.
+- PMA-011: Object pooling shall be used only for objects that are expensive to create or reset and are used at predictable high frequency.
+- PMA-012 [MANDATORY]: Rented or pooled resources shall be returned promptly exactly once and shall not be used or exposed after return.
+- PMA-013 [MANDATORY]: GC.Collect shall not be used in production as a performance strategy.
+- PMG-001 [MANDATORY]: Before implementing a non-trivial optimization, baseline metrics shall be captured, and the same metrics shall be re-measured after the change.
+- PMG-002 [MANDATORY]: Optimization work shall target only paths proven hot in profiling data or paths with material user-visible latency.
+- PMG-003 [MANDATORY]: Performance optimizations shall preserve correctness, deterministic behavior, and required observability.
+- PMG-004 [MANDATORY]: Performance investigations shall use profiling and production-safe telemetry to identify CPU, memory, allocation, and latency bottlenecks.
+- PMG-005 [MANDATORY]: Critical performance characteristics shall be protected by repeatable benchmarks or automated regression checks.
+- PMG-006 [MANDATORY]: When multiple designs meet performance targets, the simplest maintainable design shall be selected.
+- PRD-001 [MANDATORY]: Hot paths shall not use runtime reflection.
+- PRD-002: When startup or throughput is materially improved, source generation shall be preferred over runtime reflection or runtime code discovery.
+- PRD-003: Tiered compilation, quick JIT, or compilation settings shall be changed only when benchmark evidence justifies the change.
+- PRD-004: When trimmed or Native AOT deployment is required, code paths incompatible with trimming or AOT shall be avoided and library surfaces shall remain trimming-compatible.
+- PRD-005: Native AOT shall be adopted only when measured startup, memory, deployment, or scale benefits justify its constraints.
+## Testing
+- PBT-01: When the test project targets .NET 8+, the property-based test suite shall use FsCheck.
+- PBT-02: When the test project targets .NET 8+ and uses xUnit, the property-based test suite shall use FsCheck.Xunit integration.
+- PBT-03 [MANDATORY]: For broad SUT-correctness testing, the test suite shall use property-based tests as the default test type.
+- PBT-04 [MANDATORY]: For regression testing, the test suite shall use unit tests only for specific cases that previously caused issues.
+- PBT-05 [MANDATORY]: Each property-based test shall cover positive, negative, and edge-case input classes.
+- PBT-06 [MANDATORY]: Each property shall define a universal invariant that holds for all valid inputs.
+- PBT-07 [MANDATORY]: Each generator shall produce diverse realistic values, including edge cases, across the input domain.
+- PBT-08 [MANDATORY]: When a property fails, the framework shall automatically shrink the failing input to a minimal counterexample.
+- PBT-09 [MANDATORY]: For each property, the test shall enforce valid-domain evaluation through explicit preconditions or constrained generators.
+- PBT-10 [MANDATORY]: Each property-based test shall be deterministic and reproducible by controlling randomness and eliminating hidden state or side effects.
+- PBT-11 [MANDATORY]: Each property shall use a mechanical oracle that decides pass or fail and is stronger than exception-only or plausibility checks.
+- PBT-12 [MANDATORY]: When significantly changing a pre-existing unit test, the test suite shall convert it to a property-based test that verifies invariants and pre/postconditions across an input class.
+- PBT-13 [MANDATORY]: When a simpler correct reference model is available, each property shall use it as the oracle.
+- PBT-14 [MANDATORY]: When exact expected outputs are not computable, each property shall use a metamorphic oracle with a predictable output relationship.
+- PBT-15 [MANDATORY]: When no single strong oracle is available, each property shall combine multiple weak oracles.
+- PBT-16 [MANDATORY]: When a property fails, the test output shall include an informative counterexample that shrinks well and includes classification labels.
+- TDD-001 [MANDATORY]: The development workflow shall follow test-first Red-Green-Refactor.
+- TDD-002 [MANDATORY]: Before writing production code for a behavior, the developer shall write the test code for that behavior.
+- TDD-003 [MANDATORY]: Before implementing code for a behavior, the developer shall execute the corresponding test and observe it fail.
+- TDD-004 [MANDATORY]: When the test passes, the developer shall refactor the changed code while preserving test pass status.
+- TDD-005 [MANDATORY]: At the start of each cycle, the developer shall create a failing property-based test.
+- TDD-006 [MANDATORY]: In the Green step, the developer shall make the smallest functional code change that makes the failing test pass.
+- TDD-007 [MANDATORY]: In each cycle, the developer shall limit changes to a single concern.
+- TDD-008 [MANDATORY]: When moving from red to green, the implementation shall not mask failures; it shall pass by adding valid functionality.
+- TDD-009 [MANDATORY]: After refactoring, the changed code shall satisfy the project cleanliness and technical-debt standards.
+- UTR-004: When behavioral validation is possible, tests shall validate externally observable behavior and avoid internal-detail and concrete-implementation assertions.
+- UTR-005: Tests shall not mask failures with broad try/catch blocks or unconditional success assertions.
+- UTR-006: When a test fails, the team shall treat it as outstanding work and shall not suppress it.
 ## Overview
 - PLT-001: Plotter is a .NET tool for managing metadata about the plot of a novel.
 ## Completion
-- UTR-001: A feature is not complete until integration tests prove it:
-
-  1. Runs as intended in situ
-  2. Executes successfully at runtime rather than merely compiling
-  3. Produces results that are accessible and correct
-  4. Exercises the major code paths and result types involved
-
-  Features with only compilation tests or with failing runtime tests are incomplete.
+- UTR-001: A feature shall be marked complete only when integration tests pass at runtime, verify in-situ behavior, verify accessible and correct results, and exercise major code paths and result types.
+- UTR-002: When only compilation checks exist, the feature shall be marked incomplete.
+- UTR-003: When any runtime test fails, the feature shall be marked incomplete.

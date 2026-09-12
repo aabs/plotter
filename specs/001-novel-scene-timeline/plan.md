@@ -50,6 +50,7 @@ Research is captured in [research.md](research.md). Key decisions are .NET 10/C#
 - [contracts/cli.md](contracts/cli.md) defines command vocabulary, initialization workflow, output formats, audit/gap contracts, and export boundaries.
 - [contracts/tui.md](contracts/tui.md) defines shared-query behavior, layout responsibilities, keyboard interactions, and stable selection.
 - [quickstart.md](quickstart.md) defines end-to-end validation and release checks.
+- `docs/` will contain the getting-started guide, command reference, task tutorials, TUI/export guide, and developer architecture/contribution guide.
 
 ## Project Structure
 
@@ -106,9 +107,17 @@ test/
 
 Directory.Packages.props
 .editorconfig
+
+docs/
+├── getting-started.md
+├── command-reference.md
+├── tui-guide.md
+├── developer-guide.md
+├── architecture.md
+└── tutorials/
 ```
 
-**Structure Decision**: Keep the existing executable project as the application entry point, organize production code by domain/application/infrastructure/presentation boundaries, and add one property-test project plus a narrowly scoped regression folder. A separate shared library is not required until reuse or packaging boundaries justify it.
+**Structure Decision**: Keep the existing executable project as the application entry point, organize production code by domain/application/infrastructure/presentation boundaries, add one property-test project plus a narrowly scoped regression folder, and maintain versioned user/developer documentation under `docs/`. A separate shared library is not required until reuse or packaging boundaries justify it.
 
 ## Implementation sequencing notes
 
@@ -118,8 +127,8 @@ Directory.Packages.props
 4. Implement shared query services for chronological, manuscript, character, location, plot-thread, gap, audit, and travel projections.
 5. Implement all specified stable text/JSON/CSV/SARIF/Markdown/iCalendar/Graphviz DOT/Mermaid/HTML/SVG projections and export boundaries.
 6. Implement Spectre.Console command registration and the required TUI over the shared queries. The TUI must create, view, update, and remove Scenes, Participants, Locations, Plots, Participant Groups, and Interactions, plus supported relationships and annotations through shared application services.
-7. Add NuGet tool packaging and help/quickstart documentation.
-8. Verify repeatable performance and measured coverage gates before release.
+7. Add NuGet tool packaging, detailed user documentation, tutorials, getting-started guidance, and developer documentation.
+8. Verify documentation examples against CLI/TUI contracts, then verify repeatable performance and measured coverage gates before release.
 9. Drive each slice test-first with FsCheck properties and enforce coverage/analyzer gates.
 
 ## Complexity Tracking

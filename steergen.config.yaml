@@ -13,3 +13,7 @@ rulesPacks:
     path: /dotnet-performance
   - source: github:aabs/steering-rules
     path: /csharp-14
+  - source: github:aabs/steering-rules
+    path: /arch-baseline
+  - source: github:aabs/steering-rules
+    path: /arch-baseline
