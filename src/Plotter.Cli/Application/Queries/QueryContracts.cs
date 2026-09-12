@@ -44,6 +44,27 @@ public sealed record ThreadTimelineRow(string SceneId, string? Title, string? An
 
 public sealed record ThreadTimelineResult(string PlotId, IReadOnlyList<ThreadTimelineRow> Rows);
 
+public sealed record SceneCardNeighbor(string SceneId, string? Title, string? LocationId, DateTime? StoryDateTime);
+
+public sealed record SceneCardDetail(
+    SceneId SceneId,
+    string? Title,
+    int? NarrativePosition,
+    string? Act,
+    string? Chapter,
+    StoryTime? StoryTime,
+    SceneDuration? Duration,
+    LocationId? LocationId,
+    IReadOnlyList<ParticipantId> ParticipantIds,
+    IReadOnlyList<PlotRelationship> Plots,
+    ParticipantId? PovParticipantId,
+    string? Status,
+    string? Notes,
+    SceneCardNeighbor? Previous,
+    SceneCardNeighbor? Next,
+    TimeSpan? ElapsedSincePrevious,
+    IReadOnlyList<string> Flags);
+
 public sealed record SceneDetailResult(
     SceneId SceneId,
     string? Title,

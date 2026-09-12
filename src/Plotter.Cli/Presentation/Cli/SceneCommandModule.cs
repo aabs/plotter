@@ -40,13 +40,7 @@ public static class SceneCommandModule
                 TextRenderers.RenderTimeline(workspace);
                 return 0;
             case "show":
-            {
-                var id = args.ElementAtOrDefault(2) ?? throw new ArgumentException("Usage: novel scene show <scene-id>");
-                if (!workspace.Scenes.TryGetValue(id, out var scene))
-                    throw new InvalidOperationException($"Scene '{id}' does not exist.");
-                TextRenderers.RenderScene(workspace, scene);
-                return 0;
-            }
+                return SceneDetailCommandModule.RunShow(workspace, args);
             default:
                 throw new ArgumentException("Usage: novel scene add|set|list|show ...");
         }

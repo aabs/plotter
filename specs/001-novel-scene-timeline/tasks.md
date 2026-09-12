@@ -138,11 +138,11 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Query a scene with adjacent scenes, plot threads, flags, and summary, then verify the complete card and missing-neighbor behavior.
 
-- [ ] T055 [P] [US6] Define scene-card completeness, previous/next resolution, elapsed-time, absent-field, and continuity-flag properties in `test/Plotter.PropertyTests/ProjectionProperties/SceneCardProperties.cs`.
-- [ ] T056 [US6] Implement scene detail query composition in `src/Plotter.Cli/Application/Queries/SceneDetailQueries.cs`.
-- [ ] T057 [US6] Implement structured scene-card renderer in `src/Plotter.Cli/Presentation/Cli/SceneCardRenderer.cs`.
-- [ ] T058 [US6] Route all scene-listing projections to the detail-card contract and register `novel scene show` in `src/Plotter.Cli/Presentation/Cli/SceneDetailCommandModule.cs`.
-- [ ] T059 [US6] Add property coverage for card projection equivalence and unknown elapsed time in `test/Plotter.PropertyTests/CliProperties/SceneCardCommandProperties.cs`.
+- [x] T055 [P] [US6] Define scene-card completeness, previous/next resolution, elapsed-time, absent-field, and continuity-flag properties in `test/Plotter.PropertyTests/ProjectionProperties/SceneCardProperties.cs`.
+- [x] T056 [US6] Implement scene detail query composition in `src/Plotter.Cli/Application/Queries/SceneDetailQueries.cs`.
+- [x] T057 [US6] Implement structured scene-card renderer in `src/Plotter.Cli/Presentation/Cli/SceneCardRenderer.cs`.
+- [x] T058 [US6] Route all scene-listing projections to the detail-card contract and register `novel scene show` in `src/Plotter.Cli/Presentation/Cli/SceneDetailCommandModule.cs`.
+- [x] T059 [US6] Add property coverage for card projection equivalence and unknown elapsed time in `test/Plotter.PropertyTests/CliProperties/SceneCardCommandProperties.cs`.
 
 ---
 
