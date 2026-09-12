@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Plotter.Cli/Plotter.Cli.csproj" />
+  </Folder>
+</Solution>
