@@ -73,6 +73,12 @@ try
         case "thread":
             PlotThreadCommandModule.RunThreadShow(workspace, arguments);
             return;
+        case "audit":
+            AuditCommandModule.RunAudit(workspace, arguments);
+            return;
+        case "continuity":
+            AuditCommandModule.RunGaps(workspace);
+            return;
         case "where":
             LocationCommandModule.RunWhere(workspace, arguments);
             return;

@@ -152,12 +152,12 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Generate gaps, overlaps, missing fields, and continuity annotations, then verify classifications and severity.
 
-- [ ] T060 [P] [US7] Define gap boundary and severity/annotation properties in `test/Plotter.PropertyTests/ProjectionProperties/AuditProperties.cs`.
-- [ ] T061 [US7] Implement continuity gap calculations and Normal/Long/Overnight/Unknown classification in `src/Plotter.Cli/Application/Auditing/GapReportService.cs`.
-- [ ] T062 [US7] Implement time, travel, participant, location, and all audit rules in `src/Plotter.Cli/Application/Auditing/AuditService.cs`.
-- [ ] T063 [US7] Implement plain-text and SARIF audit renderers in `src/Plotter.Cli/Presentation/Cli/AuditRenderers.cs` and `src/Plotter.Cli/Presentation/Export/SarifExporter.cs`.
-- [ ] T064 [US7] Register `novel continuity gaps`, `novel audit`, and focused audit commands in `src/Plotter.Cli/Presentation/Cli/AuditCommandModule.cs`.
-- [ ] T065 [US7] Add property coverage proving intentional/approximate/implied annotations qualify findings without escalating every omission in `test/Plotter.PropertyTests/CliProperties/AuditCommandProperties.cs`.
+- [x] T060 [P] [US7] Define gap boundary and severity/annotation properties in `test/Plotter.PropertyTests/ProjectionProperties/AuditProperties.cs`.
+- [x] T061 [US7] Implement continuity gap calculations and Normal/Long/Overnight/Unknown classification in `src/Plotter.Cli/Application/Auditing/GapReportService.cs`.
+- [x] T062 [US7] Implement time, travel, participant, location, and all audit rules in `src/Plotter.Cli/Application/Auditing/AuditService.cs`.
+- [x] T063 [US7] Implement plain-text and SARIF audit renderers in `src/Plotter.Cli/Presentation/Cli/AuditRenderers.cs` and `src/Plotter.Cli/Presentation/Export/SarifExporter.cs`.
+- [x] T064 [US7] Register `novel continuity gaps`, `novel audit`, and focused audit commands in `src/Plotter.Cli/Presentation/Cli/AuditCommandModule.cs`.
+- [x] T065 [US7] Add property coverage proving intentional/approximate/implied annotations qualify findings without escalating every omission in `test/Plotter.PropertyTests/CliProperties/AuditCommandProperties.cs`.
 
 ---
 

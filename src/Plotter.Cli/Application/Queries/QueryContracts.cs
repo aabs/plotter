@@ -65,6 +65,8 @@ public sealed record SceneCardDetail(
     TimeSpan? ElapsedSincePrevious,
     IReadOnlyList<string> Flags);
 
+public sealed record GapRow(string FromSceneId, string ToSceneId, string FromContext, string ToContext, TimeSpan? Gap, GapClass GapClass);
+
 public sealed record SceneDetailResult(
     SceneId SceneId,
     string? Title,
