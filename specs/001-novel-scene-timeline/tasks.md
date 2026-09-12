@@ -39,10 +39,10 @@ description: "Task list for implementing Novel Scene Timeline"
 - [ ] T014 [P] Add reusable reference-model oracles for TOML round trips, ordering, classifications, projection equivalence, and audit severity in `test/Plotter.PropertyTests/Oracles/ReferenceOracles.cs`.
 - [ ] T015 Define `INovelFileResolver` and current-folder/explicit-path resolution in `src/Plotter.Cli/Infrastructure/Configuration/NovelFileResolver.cs`; default to the current folder and prevent cross-file leakage.
 - [ ] T016 Define typed application options for file selection, output format, locale/time settings, and TUI behavior in `src/Plotter.Cli/Infrastructure/Configuration/PlotterOptions.cs`.
-- [ ] T017 Implement Tomlyn-backed load/save behind `INovelWorkspaceStore` in `src/Plotter.Cli/Infrastructure/Storage/TomlWorkspaceStore.cs`, including format/version validation and atomic commit-or-rollback writes.
-- [ ] T018 [P] Add property tests for ID uniqueness, reference closure, validation invariants, current-folder resolution, explicit file selection, and atomic invalid-write behavior in `test/Plotter.PropertyTests/DomainProperties/FoundationalProperties.cs` and `test/Plotter.PropertyTests/PersistenceProperties/FileResolutionProperties.cs`.
+- [ ] T017 Implement async Tomlyn-backed load/save behind `INovelWorkspaceStore` in `src/Plotter.Cli/Infrastructure/Storage/TomlWorkspaceStore.cs`, accepting and propagating `CancellationToken`, including format/version validation and atomic commit-or-rollback writes.
+- [ ] T018 [P] Add property tests for ID uniqueness, reference closure, validation invariants, current-folder resolution, explicit file selection, cancellation propagation, and atomic invalid-write behavior in `test/Plotter.PropertyTests/DomainProperties/FoundationalProperties.cs` and `test/Plotter.PropertyTests/PersistenceProperties/FileResolutionProperties.cs`.
 - [ ] T019 Add the persistence round-trip property `Save(Load(Save(workspace))) == workspace` with shrinking counterexamples in `test/Plotter.PropertyTests/PersistenceProperties/TomlRoundTripProperties.cs`.
-- [ ] T020 Define application query/result DTOs and `IProjectionQueryService` contracts in `src/Plotter.Cli/Application/Queries/QueryContracts.cs`.
+- [ ] T020 Define application query/result DTOs and async `IProjectionQueryService` contracts with `CancellationToken` in `src/Plotter.Cli/Application/Queries/QueryContracts.cs`.
 - [ ] T021 Define command/result, audit finding, export, and rendering abstractions in `src/Plotter.Cli/Application/Commands/ApplicationContracts.cs` and `src/Plotter.Cli/Application/Projections/ProjectionContracts.cs`.
 - [ ] T022 Implement structured logging, expected-result diagnostics, and exception-preserving error boundaries in `src/Plotter.Cli/Infrastructure/Diagnostics/DiagnosticServices.cs`.
 - [ ] T023 Configure dependency injection and options binding in `src/Plotter.Cli/Program.cs` and `src/Plotter.Cli/Infrastructure/Composition/ServiceRegistration.cs`.
@@ -240,8 +240,8 @@ description: "Task list for implementing Novel Scene Timeline"
 - [ ] T093 [P] Add package metadata, tool command name, README, license metadata, and NuGet packing settings in `src/Plotter.Cli/Plotter.Cli.csproj` and `README.md`.
 - [ ] T094 [P] Document current-folder/default-file behavior, explicit file selection, command vocabulary, formats, and TUI keys in `docs/usage.md`.
 - [ ] T095 [P] Add XML documentation for public contracts and non-obvious failure/format behavior under `src/Plotter.Cli/`.
-- [ ] T096 Add benchmark/property performance coverage for 1,000-scene chronological queries in `test/Plotter.PropertyTests/ProjectionProperties/PerformanceProperties.cs`.
-- [ ] T097 Enforce 100% production-code coverage and fail CI on uncovered production paths in `.github/workflows/ci.yml` and coverage configuration.
+- [ ] T096 Add a repeatable benchmark harness and property-backed dataset for 1,000-scene chronological queries in `test/Plotter.PropertyTests/ProjectionProperties/PerformanceProperties.cs`, with a measured pass/fail threshold of under 2 seconds on the target personal-computer baseline.
+- [ ] T097 Create `coverage.runsettings` and enforce 100% measured coverage for production code under `src/Plotter.Cli/`, excluding generated artifacts, failing CI on uncovered paths through `.github/workflows/ci.yml`.
 - [ ] T098 Run `quickstart.md` end-to-end validation in a temporary workspace outside the repository and record any regression test IDs in `test/Plotter.PropertyTests/RegressionTests/`.
 - [ ] T099 Run `dotnet format --verify-no-changes`, `dotnet build --warnaserror`, `dotnet test`, coverage, and NuGet pack validation using `.editorconfig`, `.github/workflows/ci.yml`, `src/Plotter.Cli/Plotter.Cli.csproj`, and `Directory.Packages.props` before release.
 
@@ -262,7 +262,7 @@ description: "Task list for implementing Novel Scene Timeline"
 - **Phase 11 US9**: Depends on US1 participant/scene references; can proceed in parallel with US10.
 - **Phase 12 US10**: Depends on US1 Plot references; can proceed in parallel with US9.
 - **Phase 13 US11**: Depends on foundational persistence and all entities needed for full workspace recovery.
-- **Phase 14 US12**: Depends on shared query contracts and the views it projects; TUI/export slices can proceed in parallel after those contracts stabilize.
+- **Phase 14 US12**: P1 priority but intentionally scheduled after the prerequisite query stories because the required TUI and exporters project their stabilized contracts; TUI/export slices can proceed in parallel after those contracts stabilize.
 - **Phase 15 Polish**: Depends on all selected stories and their properties passing.
 
 ### User story completion order
@@ -275,6 +275,25 @@ All entity/persistence stories → US11
 {US2..US11 query contracts} → US12
 All selected stories → Polish
 ```
+
+## Requirements Traceability
+
+| Requirement range | Primary task coverage            |
+| ----------------- | -------------------------------- |
+| FR-001–FR-006     | T009–T033                        |
+| FR-007–FR-008     | T034–T039                        |
+| FR-009–FR-010e    | T040–T044, T071–T074             |
+| FR-010f–FR-010i   | T050–T054                        |
+| FR-010j–FR-010k   | T055–T059                        |
+| FR-011a–FR-011e   | T045–T049                        |
+| FR-011f–FR-011i   | T060–T065                        |
+| FR-011j–FR-011k   | T066–T070                        |
+| FR-012–FR-013     | T011, T017–T019, T079–T082       |
+| FR-014–FR-015     | T031–T032, T083–T092             |
+| FR-016            | T003, T093, T099                 |
+| FR-017            | T015, T017, T079–T082            |
+| FR-018–FR-021a    | T083–T099                        |
+| SC-001–SC-020     | Story property suites, T096–T099 |
 
 ## Parallel execution examples
 

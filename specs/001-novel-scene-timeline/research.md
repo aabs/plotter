@@ -56,12 +56,12 @@
 
 ## Decision 10: Export formats
 
-- **Decision**: Implement JSON and CSV as initial structured exports, SARIF for audit output, and Markdown/text for human documentation. Define iCalendar, Graphviz DOT, Mermaid, HTML, and SVG as export contracts and staged implementation targets.
-- **Rationale**: JSON/CSV/SARIF directly support scripting and tooling; other formats support the stated editor, calendar, graph, and documentation workflows.
-- **Alternatives considered**: Making every format a first-release blocker was rejected to keep the initial implementation deliverable; the contracts remain explicit for compatible follow-up work.
+- **Decision**: Treat JSON, CSV, SARIF, Markdown, iCalendar, Graphviz DOT, Mermaid, HTML, SVG, and terminal text as required export contracts for the planned release, with JSON/CSV/SARIF implemented and validated first within the same projection architecture.
+- **Rationale**: The specification uses MUST language for the complete format set, while JSON/CSV/SARIF provide the earliest scripting and audit value. The remaining formats must remain compatible with the same canonical projection model rather than becoming unplanned scope.
+- **Alternatives considered**: Deferring formats would conflict with the current specification; implementing each format independently was rejected because it risks inconsistent results.
 
 ## Decision 11: TUI scope
 
-- **Decision**: Treat the TUI as a projection/browser over query services, with stable Scene ID selection and keyboard navigation. Keep editing commands routed through the same application services as the CLI.
+- **Decision**: Treat the required initial-release TUI as a projection/browser over query services, with stable Scene ID selection and keyboard navigation. Keep editing commands routed through the same application services as the CLI.
 - **Rationale**: Ensures a selected scene remains meaningful while changing views and avoids data divergence.
 - **Alternatives considered**: A separate TUI data model was rejected because it would violate the canonical-data requirement.
