@@ -1,9 +1,15 @@
 projectRoot: /Users/aabs/dev/aabs/active/plotter/steering/project
-generationRoot: 
+generationRoot:
 activeProfiles: []
 targets: []
 registeredTargets:
 - speckit
-templatePackVersion: 
-templatePack: 
-rulesPacks: 
+templatePackVersion:
+templatePack:
+rulesPacks:
+  - source: github:aabs/steering-rules
+    path: /testing
+  - source: github:aabs/steering-rules
+    path: /dotnet-performance
+  - source: github:aabs/steering-rules
+    path: /csharp-14
