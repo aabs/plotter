@@ -38,8 +38,13 @@ try
             EntityCommandModule.RunAddParticipant(workspace, arguments);
             break;
         case "location":
-            EntityCommandModule.RunAddLocation(workspace, arguments);
-            break;
+            if (arguments.ElementAtOrDefault(1)?.Equals("add", StringComparison.OrdinalIgnoreCase) == true)
+            {
+                EntityCommandModule.RunAddLocation(workspace, arguments);
+                break;
+            }
+            LocationCommandModule.RunLocationShow(workspace, arguments);
+            return;
         case "scene":
             if (arguments.ElementAtOrDefault(1)?.Equals("list", StringComparison.OrdinalIgnoreCase) == true)
             {
@@ -58,6 +63,12 @@ try
             return;
         case "character":
             CharacterCommandModule.RunCharacter(workspace, arguments);
+            return;
+        case "locations":
+            LocationCommandModule.RunLocationsList(workspace, arguments);
+            return;
+        case "where":
+            LocationCommandModule.RunWhere(workspace, arguments);
             return;
         case "lanes":
             CharacterCommandModule.RunLanes(workspace, arguments);

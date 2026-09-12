@@ -110,11 +110,11 @@ description: "Task list for implementing Novel Scene Timeline"
 
 **Independent Test**: Generate explicit-duration and duration-less scenes, query location occupancy and `where`, and verify explicit/inferred occupancy semantics.
 
-- [ ] T045 [P] [US4] Define explicit-duration precedence, duration-less next-scene inference, gaps/overlaps, no-location, and simultaneous-location conflict properties in `test/Plotter.PropertyTests/ProjectionProperties/LocationOccupancyProperties.cs`.
-- [ ] T046 [US4] Implement location timeline, density, and active-location query services in `src/Plotter.Cli/Application/Queries/LocationQueries.cs`.
-- [ ] T047 [US4] Implement location and `where` renderers in `src/Plotter.Cli/Presentation/Cli/LocationRenderers.cs`.
-- [ ] T048 [US4] Register `novel location show`, `novel location timeline`, `novel locations list --occupancy`, and `novel where` commands in `src/Plotter.Cli/Presentation/Cli/LocationCommandModule.cs`.
-- [ ] T049 [US4] Add CLI property coverage for occupancy ranges, first/last use dates, unknown locations, and conflicts in `test/Plotter.PropertyTests/CliProperties/LocationCommandProperties.cs`.
+- [x] T045 [P] [US4] Define explicit-duration precedence, duration-less next-scene inference, gaps/overlaps, no-location, and simultaneous-location conflict properties in `test/Plotter.PropertyTests/ProjectionProperties/LocationOccupancyProperties.cs`.
+- [x] T046 [US4] Implement location timeline, density, and active-location query services in `src/Plotter.Cli/Application/Queries/LocationQueries.cs`.
+- [x] T047 [US4] Implement location and `where` renderers in `src/Plotter.Cli/Presentation/Cli/LocationRenderers.cs`.
+- [x] T048 [US4] Register `novel location show`, `novel location timeline`, `novel locations list --occupancy`, and `novel where` commands in `src/Plotter.Cli/Presentation/Cli/LocationCommandModule.cs`.
+- [x] T049 [US4] Add CLI property coverage for occupancy ranges, first/last use dates, unknown locations, and conflicts in `test/Plotter.PropertyTests/CliProperties/LocationCommandProperties.cs`.
 
 ---
 

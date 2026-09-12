@@ -24,6 +24,16 @@ public sealed record LaneRow(DateTime? Time, IReadOnlyList<LaneCell> Cells);
 
 public sealed record LaneResult(IReadOnlyList<string> ParticipantIds, IReadOnlyList<LaneRow> Rows);
 
+public sealed record LocationTimelineRow(DateTime Start, DateTime? End, string SceneId, string? Title);
+
+public sealed record LocationTimelineResult(string LocationId, IReadOnlyList<LocationTimelineRow> Rows);
+
+public sealed record LocationDensityRow(string LocationId, int SceneCount, DateTime? FirstUse, DateTime? LastUse);
+
+public sealed record LocationDensityResult(IReadOnlyList<LocationDensityRow> Rows);
+
+public sealed record WhereResult(string ParticipantId, string? LocationId, IReadOnlyList<string> ConflictLocationIds);
+
 public sealed record SceneDetailResult(
     SceneId SceneId,
     string? Title,
