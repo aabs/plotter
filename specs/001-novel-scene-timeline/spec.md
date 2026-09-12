@@ -30,13 +30,40 @@ As a novelist, I want to create scenes and assign their narrative position, temp
 
 **Independent Test**: Create a novel workspace, add a scene, assign its supported metadata, save it, and retrieve it with the same values intact.
 
+**Initialization workflow**:
+
+```text
+mkdir my-novel
+cd my-novel
+novel init
+```
+
+The default workflow creates or opens the canonical `novel.toml` workspace file in the current folder. Multiple novel files may be selected explicitly:
+
+```text
+novel init --file ~/novels/my-novel.toml
+```
+
+The initial scene/entity workflow is:
+
+```text
+novel participant add Mara
+novel location add "Boarding house"
+novel scene add S001
+novel scene set S001 --date-time 1928-06-14T08:10 --participant Mara --location "Boarding house"
+novel scene list
+novel scene show S001
+```
+
 **Acceptance Scenarios**:
 
-1. **Given** an initialized novel workspace, **When** the writer adds a scene with a non-empty Scene ID, **Then** the scene is stored under that identifier and can be listed.
-2. **Given** an existing scene and stored participant and location records, **When** the writer assigns participant IDs and a location ID, **Then** the scene references those records by ID and displays their current properties.
-3. **Given** a scene with narrative position, date-time, duration, chapter, plot, POV character, status, and notes, **When** the writer views it, **Then** each assigned value is shown with its related entity names resolved from IDs.
-4. **Given** a scene with only some context, **When** the writer views the scene, **Then** the assigned values are shown and missing values are clearly identified rather than silently invented.
-5. **Given** an existing scene, **When** the writer changes or removes an attribution, **Then** the updated scene no longer reports the previous value as current.
+1. **Given** an empty current folder, **When** the writer runs `novel init`, **Then** the tool creates a canonical TOML workspace in that folder and reports the selected file.
+2. **Given** an explicit path, **When** the writer runs `novel init --file ~/novels/my-novel.toml`, **Then** the tool initializes or opens that workspace without changing the current folder's workspace.
+3. **Given** an initialized novel workspace, **When** the writer adds a scene with a non-empty Scene ID, **Then** the scene is stored under that identifier and can be listed.
+4. **Given** an existing scene and stored participant and location records, **When** the writer assigns participant IDs and a location ID, **Then** the scene references those records by ID and displays their current properties.
+5. **Given** a scene with narrative position, date-time, duration, chapter, plot, POV character, status, and notes, **When** the writer views it, **Then** each assigned value is shown with its related entity names resolved from IDs.
+6. **Given** a scene with only some context, **When** the writer views it, **Then** the assigned values are shown and missing values are clearly identified rather than silently invented.
+7. **Given** an existing scene, **When** the writer changes or removes an attribution, **Then** the updated scene no longer reports the previous value as current.
 
 ---
 
@@ -394,6 +421,7 @@ As a novelist or editor, I want consistent commands, interactive browsing, and d
 4. **Given** a selected scene in the TUI, **When** the writer changes ordering, filters, or view, **Then** the selected scene remains stable when it is still in the result set and can be opened with Enter.
 5. **Given** canonical scene data, **When** the writer exports Markdown, CSV, JSON, iCalendar, Graphviz DOT, Mermaid, HTML, SVG, or terminal text, **Then** the artifact is derived from the canonical data and does not create a separate editable data model.
 6. **Given** a new installation, **When** the writer follows the primary workflow, **Then** `novel timeline`, `novel scene show S034`, `novel character timeline Mara`, and `novel audit` provide the initial chronological, detail, character-continuity, and problem-finding views.
+7. **Given** an initialized workspace, **When** the writer uses the TUI, **Then** the writer can create, view, update, and remove Scenes, Participants, Locations, Plots, Participant Groups, and Interactions, and can create or remove their supported relationships and annotations through TUI actions backed by the same application services as the CLI.
 
 Example TUI layout:
 
@@ -465,6 +493,11 @@ Supported TUI keys include `j`/`k` for scene movement, Enter for details, `/` fo
 ### Functional Requirements
 
 - **FR-001**: The tool MUST allow a writer to initialize and open a novel workspace.
+- **FR-001a**: The tool MUST support `novel init`, creating or opening `novel.toml` in the current folder by default, and MUST report the resolved file.
+- **FR-001b**: The tool MUST support `novel init --file <path>` for initializing or opening a workspace at an explicit path without changing the current-folder default.
+- **FR-001c**: The tool MUST support the initial entity and scene workflow through `novel participant add <name>`, `novel location add <name>`, `novel scene add <scene-id>`, `novel scene set <scene-id> [options]`, `novel scene list`, and `novel scene show <scene-id>`.
+- **FR-001d**: `novel scene set` MUST support at least the initial scene attribution options for story date-time, participant ID/name, and location ID/name while preserving the canonical ID references.
+- **FR-001e**: Initialization MUST create or open a canonical TOML workspace without overwriting existing data unless the writer explicitly requests replacement.
 - **FR-002**: The tool MUST allow a writer to create, view, update, and remove scenes with a non-empty, unique Scene ID and optional title or description.
 - **FR-002a**: The tool MUST reject creation or renaming of a scene when the resulting Scene ID is empty or already assigned to another scene.
 - **FR-002b**: The tool MUST NOT require Scene IDs to follow a prescribed pattern; values such as `SOME-SCENE-NAME` are valid examples, not a mandatory format.
@@ -547,6 +580,9 @@ Supported TUI keys include `j`/`k` for scene movement, Enter for details, `/` fo
 - **FR-020a**: The TUI MUST provide scene browsing, detail display, filtering by character/location/thread/date, ordering changes, view changes, search, date navigation, character lanes, audit access, and scene editing.
 - **FR-020b**: The TUI MUST support `j`/`k`, Enter, `/`, `f`, `o`, `v`, `g`, `c`, `a`, `e`, and `q` according to the documented interactions.
 - **FR-020c**: The TUI MUST preserve the selected Scene ID across view, order, and filter changes whenever that scene remains in the result set.
+- **FR-020d**: The TUI MUST provide create, view, update, and remove actions for Scenes, Participants, Locations, Plots, Participant Groups, and Interactions.
+- **FR-020e**: The TUI MUST provide actions for supported relationships and annotations, including scene-to-participant, scene-to-location, scene-to-plot, POV participant, plot-thread classification/annotation, participant-group membership, and continuity annotations.
+- **FR-020f**: TUI create and update actions MUST use the same validation, persistence, and application services as equivalent CLI commands.
 - **FR-021**: The tool MUST support calendar projections with `novel calendar --day`, `--week`, and `--month` views.
 - **FR-021a**: The initial release MUST prioritize `novel scene list --order manuscript`, `novel timeline --order story-time`, `novel scene show <id>`, `novel character timeline <name>`, `novel location timeline <name>`, `novel audit time`, `novel audit participants`, calendar views, JSON/CSV export, and the TUI over those queries.
 

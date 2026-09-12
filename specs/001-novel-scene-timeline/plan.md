@@ -12,7 +12,7 @@ Build a .NET 10 / C# 14 NuGet CLI tool for managing novel scenes and continuity 
 
 **Primary Dependencies**: Spectre.Console; Tomlyn behind a storage abstraction for TOML; FsCheck and FsCheck.Xunit for property-based tests; .NET testing platform/xUnit integration required by the constitution.
 
-**Storage**: Local human-readable TOML file; current-folder file by default, explicit path override for multiple novels.
+**Storage**: Local human-readable TOML file; `novel.toml` in the current folder by default, with an explicit path override for multiple novels.
 
 **Testing**: FsCheck + FsCheck.Xunit property-based tests; TDD red-green-refactor; regression-only example tests; coverage collection with a 100% production-code gate.
 
@@ -47,7 +47,7 @@ Research is captured in [research.md](research.md). Key decisions are .NET 10/C#
 ## Phase 1: Design Summary
 
 - [data-model.md](data-model.md) defines workspace entities, IDs, relationships, lifecycle, and invariants.
-- [contracts/cli.md](contracts/cli.md) defines command vocabulary, output formats, audit/gap contracts, and export boundaries.
+- [contracts/cli.md](contracts/cli.md) defines command vocabulary, initialization workflow, output formats, audit/gap contracts, and export boundaries.
 - [contracts/tui.md](contracts/tui.md) defines shared-query behavior, layout responsibilities, keyboard interactions, and stable selection.
 - [quickstart.md](quickstart.md) defines end-to-end validation and release checks.
 
@@ -112,12 +112,12 @@ Directory.Packages.props
 
 ## Implementation sequencing notes
 
-1. Establish central package management, project analyzers, package metadata, and file-resolution options.
+1. Establish central package management, project analyzers, package metadata, and file-resolution options. The initialization command set is `novel init` (current-folder `novel.toml`), `novel init --file <path>`, `novel participant add <name>`, `novel location add <name>`, `novel scene add <scene-id>`, `novel scene set <scene-id> [options]`, `novel scene list`, and `novel scene show <scene-id>`.
 2. Define immutable domain records, IDs, temporal values, continuity annotations, and validation results.
 3. Implement TOML DTOs and atomic load/save services with current-folder/default-file resolution.
 4. Implement shared query services for chronological, manuscript, character, location, plot-thread, gap, audit, and travel projections.
 5. Implement all specified stable text/JSON/CSV/SARIF/Markdown/iCalendar/Graphviz DOT/Mermaid/HTML/SVG projections and export boundaries.
-6. Implement Spectre.Console command registration and the required TUI over the shared queries.
+6. Implement Spectre.Console command registration and the required TUI over the shared queries. The TUI must create, view, update, and remove Scenes, Participants, Locations, Plots, Participant Groups, and Interactions, plus supported relationships and annotations through shared application services.
 7. Add NuGet tool packaging and help/quickstart documentation.
 8. Verify repeatable performance and measured coverage gates before release.
 9. Drive each slice test-first with FsCheck properties and enforce coverage/analyzer gates.

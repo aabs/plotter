@@ -37,7 +37,7 @@ description: "Task list for implementing Novel Scene Timeline"
 - [ ] T012 Define domain validation results and actionable diagnostic types in `src/Plotter.Cli/Domain/Validation.cs`, enforcing “POV participant belongs to scene”, non-negative duration, valid Plot time bounds, and reference closure.
 - [ ] T013 [P] Add FsCheck generators for valid/invalid IDs, dates, durations, scenes, entities, relationships, workspaces, and continuity annotations in `test/Plotter.PropertyTests/Generators/DomainGenerators.cs`.
 - [ ] T014 [P] Add reusable reference-model oracles for TOML round trips, ordering, classifications, projection equivalence, and audit severity in `test/Plotter.PropertyTests/Oracles/ReferenceOracles.cs`.
-- [ ] T015 Define `INovelFileResolver` and current-folder/explicit-path resolution in `src/Plotter.Cli/Infrastructure/Configuration/NovelFileResolver.cs`; default to the current folder and prevent cross-file leakage.
+- [ ] T015 Define `INovelFileResolver` and current-folder/explicit-path resolution in `src/Plotter.Cli/Infrastructure/Configuration/NovelFileResolver.cs`; default to `novel.toml` in the current folder and prevent cross-file leakage.
 - [ ] T016 Define typed application options for file selection, output format, locale/time settings, and TUI behavior in `src/Plotter.Cli/Infrastructure/Configuration/PlotterOptions.cs`.
 - [ ] T017 Implement async Tomlyn-backed load/save behind `INovelWorkspaceStore` in `src/Plotter.Cli/Infrastructure/Storage/TomlWorkspaceStore.cs`, accepting and propagating `CancellationToken`, including format/version validation and atomic commit-or-rollback writes.
 - [ ] T018 [P] Add property tests for ID uniqueness, reference closure, validation invariants, current-folder resolution, explicit file selection, cancellation propagation, and atomic invalid-write behavior in `test/Plotter.PropertyTests/DomainProperties/FoundationalProperties.cs` and `test/Plotter.PropertyTests/PersistenceProperties/FileResolutionProperties.cs`.
@@ -65,11 +65,11 @@ description: "Task list for implementing Novel Scene Timeline"
 
 ### Implementation for User Story 1
 
-- [ ] T029 [US1] Implement scene/entity create-update-remove application services in `src/Plotter.Cli/Application/Commands/SceneCommands.cs` and `src/Plotter.Cli/Application/Commands/EntityCommands.cs`.
+- [ ] T029 [US1] Implement workspace initialization/opening plus scene/entity create-update-remove application services in `src/Plotter.Cli/Application/Commands/WorkspaceCommands.cs`, `src/Plotter.Cli/Application/Commands/SceneCommands.cs`, and `src/Plotter.Cli/Application/Commands/EntityCommands.cs`; support `novel init` and `novel init --file <path>`.
 - [ ] T030 [US1] Implement scene reference and metadata validation in `src/Plotter.Cli/Application/Commands/SceneValidationService.cs`.
-- [ ] T031 [US1] Implement scene and entity CLI commands using Spectre.Console in `src/Plotter.Cli/Presentation/Cli/SceneCommandModule.cs` and `src/Plotter.Cli/Presentation/Cli/EntityCommandModule.cs`.
+- [ ] T031 [US1] Implement initialization, scene, participant, and location CLI commands using Spectre.Console in `src/Plotter.Cli/Presentation/Cli/WorkspaceCommandModule.cs`, `src/Plotter.Cli/Presentation/Cli/SceneCommandModule.cs`, and `src/Plotter.Cli/Presentation/Cli/EntityCommandModule.cs`; support `novel participant add`, `novel location add`, `novel scene add`, `novel scene set`, `novel scene list`, and `novel scene show`.
 - [ ] T032 [US1] Implement human-readable scene/entity output and actionable validation diagnostics in `src/Plotter.Cli/Presentation/Cli/TextRenderers.cs`.
-- [ ] T033 [US1] Make all US1 properties pass and verify `novel scene list`, scene editing, persistence, and current-folder selection through `test/Plotter.PropertyTests/CliProperties/SceneCommandProperties.cs`.
+- [ ] T033 [US1] Make all US1 properties pass and verify `novel init`, `novel init --file`, the participant/location/scene initialization workflow, scene editing, persistence, and current-folder selection through `test/Plotter.PropertyTests/CliProperties/SceneCommandProperties.cs` and `test/Plotter.PropertyTests/CliProperties/WorkspaceCommandProperties.cs`.
 
 **Checkpoint**: Scene context can be managed and persisted independently as the MVP.
 
@@ -222,14 +222,14 @@ description: "Task list for implementing Novel Scene Timeline"
 
 - [ ] T083 [P] [US12] Define text/JSON/CSV/SARIF equivalence and deterministic export properties in `test/Plotter.PropertyTests/ProjectionProperties/FormatEquivalenceProperties.cs`.
 - [ ] T084 [P] [US12] Define CLI alias equivalence, empty-result validity, and current-folder file-selection properties in `test/Plotter.PropertyTests/CliProperties/ComposableCommandProperties.cs`.
-- [ ] T085 [P] [US12] Define TUI selected-Scene-ID stability, filtered-selection fallback, and keyboard-command properties in `test/Plotter.PropertyTests/CliProperties/TuiProperties.cs`.
+- [ ] T085 [P] [US12] Define TUI selected-Scene-ID stability, filtered-selection fallback, keyboard-command, major-object CRUD, relationship-editing, and CLI/TUI service-equivalence properties in `test/Plotter.PropertyTests/CliProperties/TuiProperties.cs`.
 - [ ] T086 [US12] Implement shared result DTO mapping and stable text/JSON/CSV renderers in `src/Plotter.Cli/Presentation/Export/BasicExporters.cs`.
 - [ ] T087 [US12] Implement SARIF, Markdown, iCalendar, Graphviz DOT, Mermaid, HTML, SVG, and text exporters in `src/Plotter.Cli/Presentation/Export/ArtifactExporters.cs`.
 - [ ] T088 [US12] Implement graph projection by participants/locations and register export commands in `src/Plotter.Cli/Presentation/Cli/ExportCommandModule.cs`.
 - [ ] T089 [US12] Implement calendar day/week/month projections and commands in `src/Plotter.Cli/Presentation/Cli/CalendarCommandModule.cs`.
-- [ ] T090 [US12] Implement the Spectre.Console TUI layout, filters, search, ordering/view controls, date jump, lanes, audit, edit, quit, and Enter-to-detail behavior in `src/Plotter.Cli/Presentation/Tui/PlotterTui.cs`.
-- [ ] T091 [US12] Implement the stable-selection state model and shared TUI query adapter in `src/Plotter.Cli/Presentation/Tui/TuiState.cs`.
-- [ ] T092 [US12] Add CLI/TUI/export property coverage for canonical-data equivalence and selection stability in `test/Plotter.PropertyTests/CliProperties/InteractiveProjectionProperties.cs`.
+- [ ] T090 [US12] Implement the Spectre.Console TUI layout, filters, search, ordering/view controls, date jump, lanes, audit, quit, and Enter-to-detail behavior in `src/Plotter.Cli/Presentation/Tui/PlotterTui.cs`, including create/view/update/remove flows for Scenes, Participants, Locations, Plots, Participant Groups, and Interactions.
+- [ ] T091 [US12] Implement the stable-selection state model and shared TUI query/command adapter in `src/Plotter.Cli/Presentation/Tui/TuiState.cs`, routing relationship and annotation edits through application services.
+- [ ] T092 [US12] Add CLI/TUI/export property coverage for canonical-data equivalence, selection stability, major-object CRUD, relationship creation/removal, and shared validation in `test/Plotter.PropertyTests/CliProperties/InteractiveProjectionProperties.cs`.
 
 ---
 

@@ -2,7 +2,9 @@
 
 ## General rules
 
-- Commands read the active TOML file from the current folder by default.
+- Commands read `novel.toml` from the current folder by default.
+- `novel init` creates or opens the current-folder `novel.toml` without replacing existing data.
+- `novel init --file <path>` creates or opens an explicitly selected workspace without changing the current-folder default.
 - An explicit file/path option selects another novel workspace.
 - Human-readable plain text is the default and must be stable for Git diffs.
 - `--format json|csv|sarif|markdown|ical|dot|mermaid|html|svg|text` is explicit; unsupported combinations fail with an actionable diagnostic.
@@ -12,6 +14,12 @@
 ## Initial command vocabulary
 
 ```text
+novel init
+novel init --file <path>
+novel participant add <name>
+novel location add <name>
+novel scene add <scene-id>
+novel scene set <scene-id> [options]
 novel scene list [--order manuscript|story-time] [filters]
 novel scene show <scene-id>
 novel timeline [--order story-time] [--from DATE] [--to DATE] [--character NAME]
