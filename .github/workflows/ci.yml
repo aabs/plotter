@@ -36,6 +36,9 @@ jobs:
     # Trusted publishing (OIDC) is only available on trusted branches, not pull requests.
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    # Run inside the 'release' GitHub Environment so the OIDC token carries
+    # environment=release, matching the nuget.org trusted publisher policy.
+    environment: release
     permissions:
       contents: read
       id-token: write # required for NuGet trusted publishing (OIDC → short-lived API key)
