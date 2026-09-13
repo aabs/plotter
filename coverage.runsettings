@@ -6,6 +6,7 @@
         <Configuration>
           <Format>cobertura</Format>
           <Include>[Plotter.Cli]*</Include>
+          <Exclude>[Plotter.Cli]Program*</Exclude>
           <ExcludeByFile>**/obj/**</ExcludeByFile>
         </Configuration>
       </DataCollector>

@@ -27,7 +27,7 @@ jobs:
         run: dotnet test plotter.slnx --no-build --settings coverage.runsettings
 
       - name: Enforce coverage baseline
-        run: python3 eng/check_coverage.py 60
+        run: python3 eng/check_coverage.py 75
 
       - name: Format verification
         run: dotnet format plotter.slnx --no-restore --verify-no-changes

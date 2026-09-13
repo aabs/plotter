@@ -2,12 +2,12 @@ namespace Plotter.Cli.Domain;
 
 public sealed record Participant(ParticipantId Id, string Name, IReadOnlyList<GroupId>? GroupIds = null)
 {
-    public IReadOnlyList<GroupId> GroupIds { get; init; } = GroupIds ?? [];
+  public IReadOnlyList<GroupId> GroupIds { get; init; } = GroupIds ?? [];
 }
 
 public sealed record ParticipantGroup(GroupId Id, string Name, IReadOnlyList<ParticipantId>? ParticipantIds = null)
 {
-    public IReadOnlyList<ParticipantId> ParticipantIds { get; init; } = ParticipantIds ?? [];
+  public IReadOnlyList<ParticipantId> ParticipantIds { get; init; } = ParticipantIds ?? [];
 }
 
 public sealed record Location(LocationId Id, string Name);
@@ -18,7 +18,7 @@ public sealed record PlotRelationship(PlotId PlotId, PlotThreadClassification Cl
 
 public sealed record Interaction(string? Type, string? Description, IReadOnlyList<ParticipantId>? ParticipantIds = null)
 {
-    public IReadOnlyList<ParticipantId> ParticipantIds { get; init; } = ParticipantIds ?? [];
+  public IReadOnlyList<ParticipantId> ParticipantIds { get; init; } = ParticipantIds ?? [];
 }
 
 public sealed record Scene(
@@ -38,25 +38,25 @@ public sealed record Scene(
     string? Act = null,
     string? Chapter = null)
 {
-    public IReadOnlyList<ParticipantId> ParticipantIds { get; init; } = ParticipantIds ?? [];
-    public IReadOnlyList<PlotRelationship> Plots { get; init; } = Plots ?? [];
-    public IReadOnlyList<ContinuityAnnotation> ContinuityAnnotations { get; init; } = ContinuityAnnotations ?? [];
-    public IReadOnlyList<Interaction> Interactions { get; init; } = Interactions ?? [];
+  public IReadOnlyList<ParticipantId> ParticipantIds { get; init; } = ParticipantIds ?? [];
+  public IReadOnlyList<PlotRelationship> Plots { get; init; } = Plots ?? [];
+  public IReadOnlyList<ContinuityAnnotation> ContinuityAnnotations { get; init; } = ContinuityAnnotations ?? [];
+  public IReadOnlyList<Interaction> Interactions { get; init; } = Interactions ?? [];
 }
 
 public sealed class NovelWorkspace
 {
-    public string? NovelTitle { get; set; }
+  public string? NovelTitle { get; set; }
 
-    public string FormatVersion { get; set; } = "1";
+  public string FormatVersion { get; set; } = "1";
 
-    public Dictionary<string, Participant> Participants { get; } = new(StringComparer.OrdinalIgnoreCase);
+  public Dictionary<string, Participant> Participants { get; } = new(StringComparer.OrdinalIgnoreCase);
 
-    public Dictionary<string, Location> Locations { get; } = new(StringComparer.OrdinalIgnoreCase);
+  public Dictionary<string, Location> Locations { get; } = new(StringComparer.OrdinalIgnoreCase);
 
-    public Dictionary<string, Plot> Plots { get; } = new(StringComparer.OrdinalIgnoreCase);
+  public Dictionary<string, Plot> Plots { get; } = new(StringComparer.OrdinalIgnoreCase);
 
-    public Dictionary<string, ParticipantGroup> ParticipantGroups { get; } = new(StringComparer.OrdinalIgnoreCase);
+  public Dictionary<string, ParticipantGroup> ParticipantGroups { get; } = new(StringComparer.OrdinalIgnoreCase);
 
-    public Dictionary<string, Scene> Scenes { get; } = new(StringComparer.OrdinalIgnoreCase);
+  public Dictionary<string, Scene> Scenes { get; } = new(StringComparer.OrdinalIgnoreCase);
 }

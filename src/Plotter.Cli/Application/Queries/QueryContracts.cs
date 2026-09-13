@@ -121,7 +121,7 @@ public sealed record SceneDetailResult(
 /// <summary>Query service contract for projecting scene lists and details.</summary>
 public interface IProjectionQueryService
 {
-    Task<SceneListResult> GetSceneListAsync(SceneListQuery query, CancellationToken cancellationToken = default);
+  Task<SceneListResult> GetSceneListAsync(SceneListQuery query, CancellationToken cancellationToken = default);
 
-    Task<SceneDetailResult> GetSceneDetailAsync(SceneId sceneId, CancellationToken cancellationToken = default);
+  Task<SceneDetailResult> GetSceneDetailAsync(SceneId sceneId, CancellationToken cancellationToken = default);
 }

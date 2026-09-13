@@ -6,12 +6,12 @@ namespace Plotter.Cli.Presentation.Cli;
 
 public static class TravelCommandModule
 {
-    private static readonly NullTravelModel DefaultModel = new();
+  private static readonly NullTravelModel DefaultModel = new();
 
-    public static int RunTravel(NovelWorkspace workspace, IReadOnlyList<string> args)
-    {
-        var participant = args.ElementAtOrDefault(2) ?? throw new ArgumentException("Usage: novel travel <participant> --date YYYY-MM-DD");
-        TravelRenderers.RenderTravel(workspace, TravelQueries.GetTravel(workspace, participant, DefaultModel));
-        return 0;
-    }
+  public static int RunTravel(NovelWorkspace workspace, IReadOnlyList<string> args)
+  {
+    var participant = args.ElementAtOrDefault(2) ?? throw new ArgumentException("Usage: novel travel <participant> --date YYYY-MM-DD");
+    TravelRenderers.RenderTravel(workspace, TravelQueries.GetTravel(workspace, participant, DefaultModel));
+    return 0;
+  }
 }

@@ -7,13 +7,13 @@ namespace Plotter.Cli.Infrastructure.Composition;
 
 public static class ServiceRegistration
 {
-    public static ServiceProvider Build()
-    {
-        var services = new ServiceCollection();
-        services.AddSingleton<INovelFileResolver, NovelFileResolver>();
-        services.AddSingleton<INovelWorkspaceStore, TomlWorkspaceStore>();
-        services.AddSingleton<DiagnosticSink>();
-        services.AddOptions<PlotterOptions>();
-        return services.BuildServiceProvider();
-    }
+  public static ServiceProvider Build()
+  {
+    var services = new ServiceCollection();
+    services.AddSingleton<INovelFileResolver, NovelFileResolver>();
+    services.AddSingleton<INovelWorkspaceStore, TomlWorkspaceStore>();
+    services.AddSingleton<DiagnosticSink>();
+    services.AddOptions<PlotterOptions>();
+    return services.BuildServiceProvider();
+  }
 }

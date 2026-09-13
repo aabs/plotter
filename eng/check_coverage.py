@@ -6,13 +6,17 @@ The 100% production-coverage target is the release requirement; this gate
 prevents regressions from a documented baseline while the remaining gaps close.
 """
 import glob
+import os
 import re
 import sys
 
 
 def main() -> int:
     threshold = float(sys.argv[1]) if len(sys.argv) > 1 else 60.0
-    reports = sorted(glob.glob("test/Plotter.PropertyTests/TestResults/*/coverage.cobertura.xml"))
+    reports = sorted(
+        glob.glob("test/Plotter.PropertyTests/TestResults/*/coverage.cobertura.xml"),
+        key=os.path.getmtime,
+    )
     if not reports:
         print("No coverage report found. Ensure 'dotnet test --settings coverage.runsettings' ran.")
         return 1
